@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name = "NoActionBar" parent="android:Theme.Material">
+        <item name = "android:windowActionBar">false</item>
+        <item name = "android:windowNoTitle">true</item>
+    </style>
+
+    <style name="InputTextLabel" parent="TextAppearance.AppCompat">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@color/colorGrey</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@color/colorLightGrey</item>
+        <item name="colorControlNormal">@color/colorLightGrey</item>
+        <item name="colorControlActivated">@color/colorLightGrey</item>
+        <!-- Error color -->
+        <item name="android:textColorHighlight">@color/colorError</item>
+        <item name="android:textColorLink">@color/colorError</item>
+    </style>
+
+
+</resources>
