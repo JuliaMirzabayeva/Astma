@@ -3,7 +3,7 @@ package com.example.jjp.astma.modules.login
 import android.content.Intent
 import android.os.Bundle
 import com.example.jjp.astma.R
-import com.example.jjp.astma.modules.chart.ChartActivity
+import com.example.jjp.astma.modules.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import nucleus.factory.RequiresPresenter
 import nucleus.view.NucleusActivity
@@ -29,7 +29,7 @@ class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
     }
 
     private fun goToChartActivity() {
-        val intent = Intent(this.baseContext, ChartActivity::class.java)
+        val intent = Intent(this.baseContext, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
