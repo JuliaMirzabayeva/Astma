@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.jjp.astma.R
+import kotlinx.android.synthetic.main.fragment_right_panel.*
 import nucleus.factory.RequiresPresenter
 import nucleus.view.NucleusFragment
 
@@ -17,5 +18,19 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setTimeSelected(true)
+
+        morningButton.setOnClickListener { _ ->
+            setTimeSelected(true)
+        }
+        eveningButton.setOnClickListener { _ ->
+            setTimeSelected(false)
+        }
+    }
+
+    private fun setTimeSelected(isMorning : Boolean){
+        morningButton.isSelected = isMorning
+        eveningButton.isSelected = !isMorning
     }
 }

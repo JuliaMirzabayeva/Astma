@@ -1,7 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/right_panel_width"
     android:layout_height="match_parent"
-    android:background="@color/colorError">
+    android:background="@color/colorPrimary">
+
+
+    <LinearLayout
+        android:id="@+id/timeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/normal_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/morningButton"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="50"
+            android:background="@drawable/background_left_selector"
+            android:gravity="center"
+            android:text="@string/morning"
+            android:textColor="@drawable/text_selector" />
+
+        <TextView
+            android:id="@+id/eveningButton"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="50"
+            android:background="@drawable/background_right_selector"
+            android:gravity="center"
+            android:text="@string/evening"
+            android:textColor="@drawable/text_selector" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/addPointButton"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height_normal"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/normal_margin"
+        android:background="@drawable/ic_button_accent_background"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:text="@string/add"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary" />
 
 </RelativeLayout>

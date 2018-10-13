@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
     <RelativeLayout
         android:id="@+id/rightPanelContainer"
-        android:layout_width="140dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        tools:layout_width="@dimen/right_panel_width">
 
     </RelativeLayout>
 
     <View
         android:id="@+id/rightPanelSeparator"
-        android:layout_width="1dp"
+        android:layout_width="@dimen/separator_width"
         android:layout_height="match_parent"
-        android:background="@color/colorGrey"
-        android:layout_toStartOf="@id/rightPanelContainer"/>
+        android:layout_toStartOf="@id/rightPanelContainer"
+        android:background="@color/colorGrey" />
 
 </RelativeLayout>

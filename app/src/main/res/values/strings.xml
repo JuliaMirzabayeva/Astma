@@ -7,4 +7,7 @@
     <string name="sign_up">Зарегестрироваться</string>
     <string name="error_invalid_device_code">Код устройстрва должен содержать 10 символов</string>
     <string name="error_field_required">Поле обязвтельно для заполнения</string>
+    <string name="add">Добавить</string>
+    <string name="morning">Утро</string>
+    <string name="evening">Вечер</string>
 </resources>
