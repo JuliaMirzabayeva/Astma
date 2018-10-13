@@ -9,6 +9,8 @@ import com.example.jjp.astma.modules.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_right_panel.*
 import nucleus.factory.RequiresPresenter
 import nucleus.view.NucleusFragment
+import java.text.SimpleDateFormat
+import java.util.*
 
 @RequiresPresenter(RightPanelFragmentPresenter::class)
 class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
@@ -20,6 +22,7 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setDefaultDate()
         setTimeSelected(true)
 
         morningButton.setOnClickListener { _ ->
@@ -30,8 +33,16 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
         }
 
         dateLabel.setOnClickListener { _ ->
-            (activity as MainActivity).showDatePicker()
+            val calendar = Calendar.getInstance()
+            calendar.time = getSimpleDayFormat().parse(dateLabel.text.toString())
+            (activity as MainActivity).showDatePicker(calendar.get(Calendar.DAY_OF_MONTH),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.YEAR))
         }
+    }
+
+    private fun setDefaultDate() {
+        setDate(Calendar.getInstance().time)
     }
 
     private fun setTimeSelected(isMorning: Boolean) {
@@ -39,7 +50,11 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
         eveningButton.isSelected = !isMorning
     }
 
-    fun setDate(day: Int, month: Int, year: Int) {
-        dateLabel.text = getString(R.string.date_pattern, day, month, year)
+    fun setDate(date: Date) {
+        dateLabel.text = getSimpleDayFormat().format(date)
+    }
+
+    private fun getSimpleDayFormat(): SimpleDateFormat {
+        return SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
     }
 }

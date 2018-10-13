@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/right_panel_width"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:id="@+id/dateLabel"
@@ -71,6 +73,8 @@
         android:background="@drawable/button_stoke_grey_background"
         android:gravity="center"
         android:hint="@string/exhale"
+        android:cursorVisible="false"
+        android:inputType="number"
         android:textColor="@color/colorLightGrey"
         android:textColorHint="@color/colorGreyDark"
         android:textSize="@dimen/text_size_normal" />

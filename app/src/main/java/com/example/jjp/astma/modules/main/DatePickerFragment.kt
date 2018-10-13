@@ -8,13 +8,11 @@ import java.util.Calendar
 
 
 class DatePickerFragment : DialogFragment() {
+    var day: Int = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    var month: Int = Calendar.getInstance().get(Calendar.MONTH)
+    var year: Int = Calendar.getInstance().get(Calendar.YEAR)
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-
         return DatePickerDialog(activity!!, dateSetListener, year, month, day)
     }
 
@@ -24,5 +22,13 @@ class DatePickerFragment : DialogFragment() {
 
     companion object {
         const val DATE_PICKER_TAG = "date_picker"
+
+        fun createNewInstance(day: Int, month: Int, year: Int) : DatePickerFragment{
+            val datePickerFragment = DatePickerFragment()
+            datePickerFragment.day  = day
+            datePickerFragment.month = month
+            datePickerFragment.year = year
+            return datePickerFragment
+        }
     }
 }

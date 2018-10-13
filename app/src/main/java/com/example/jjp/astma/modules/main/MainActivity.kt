@@ -9,7 +9,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val dateChangeListeners = ArrayList<DateChangeListener>()
+    private val dateChangeListeners = ArrayList<DateChangeListener>()
 
     interface DateChangeListener{
         fun onDateChanged(day: Int, month: Int, year: Int)
@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    fun showDatePicker(){
-        val datePickerFragment = DatePickerFragment()
+    fun showDatePicker(day: Int, month: Int, year: Int){
+        val datePickerFragment = DatePickerFragment.createNewInstance(day, month, year)
         datePickerFragment.show( supportFragmentManager, DatePickerFragment.DATE_PICKER_TAG)
     }
 
