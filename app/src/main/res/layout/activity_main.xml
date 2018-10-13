@@ -19,6 +19,6 @@
         android:layout_width="@dimen/separator_width"
         android:layout_height="match_parent"
         android:layout_toStartOf="@id/rightPanelContainer"
-        android:background="@color/colorGrey" />
+        android:background="@color/colorGreyDark" />
 
 </RelativeLayout>

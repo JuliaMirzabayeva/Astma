@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.jjp.astma.R
+import com.example.jjp.astma.modules.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_right_panel.*
 import nucleus.factory.RequiresPresenter
 import nucleus.view.NucleusFragment
@@ -27,10 +28,18 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
         eveningButton.setOnClickListener { _ ->
             setTimeSelected(false)
         }
+
+        dateLabel.setOnClickListener { _ ->
+            (activity as MainActivity).showDatePicker()
+        }
     }
 
-    private fun setTimeSelected(isMorning : Boolean){
+    private fun setTimeSelected(isMorning: Boolean) {
         morningButton.isSelected = isMorning
         eveningButton.isSelected = !isMorning
+    }
+
+    fun setDate(day: Int, month: Int, year: Int) {
+        dateLabel.text = getString(R.string.date_pattern, day, month, year)
     }
 }

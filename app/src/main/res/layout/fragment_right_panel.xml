@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/right_panel_width"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
+
+    <TextView
+        android:id="@+id/dateLabel"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:layout_marginEnd="@dimen/normal_margin"
+        android:background="@drawable/button_stoke_grey_background"
+        android:gravity="center"
+        android:textColor="@color/colorLightGrey"
+        tools:text="18.08.2018" />
 
 
     <LinearLayout
         android:id="@+id/timeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/dateLabel"
         android:layout_margin="@dimen/normal_margin"
         android:orientation="horizontal">
 
@@ -17,7 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="50"
-            android:background="@drawable/background_left_selector"
+            android:background="@drawable/left_corners_stroke_background"
             android:gravity="center"
             android:text="@string/morning"
             android:textColor="@drawable/text_selector" />
@@ -27,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="50"
-            android:background="@drawable/background_right_selector"
+            android:background="@drawable/right_corners_stroke_background"
             android:gravity="center"
             android:text="@string/evening"
             android:textColor="@drawable/text_selector" />
@@ -46,5 +60,19 @@
         android:text="@string/add"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary" />
+
+    <EditText
+        android:id="@+id/valueLabel"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/timeLayout"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:layout_marginEnd="@dimen/normal_margin"
+        android:background="@drawable/button_stoke_grey_background"
+        android:gravity="center"
+        android:hint="@string/exhale"
+        android:textColor="@color/colorLightGrey"
+        android:textColorHint="@color/colorGreyDark"
+        android:textSize="@dimen/text_size_normal" />
 
 </RelativeLayout>
