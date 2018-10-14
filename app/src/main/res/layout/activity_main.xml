@@ -21,4 +21,14 @@
         android:layout_toStartOf="@id/rightPanelContainer"
         android:background="@color/colorGreyDark" />
 
+    <LinearLayout
+        android:id="@+id/chartContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/rightPanelSeparator"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
 </RelativeLayout>
