@@ -27,13 +27,16 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
     }
 
     private fun initChart() {
-        val entries = ArrayList<Entry>()
-        entries.add(Entry(0F, 4F))
-        entries.add(Entry(1F, 1F))
-        entries.add(Entry(2F, 2F))
-        entries.add(Entry(3F, 4F))
+       // val entries = ArrayList<Entry>()
+//        entries.add(Entry(0F, 4F))
+//        entries.add(Entry(1F, 1F))
+//        entries.add(Entry(2F, 2F))
+//        entries.add(Entry(3F, 4F))
 
-        val dataSet = LineDataSet(entries, "")
+        val dataSet = LineDataSet(ArrayList<Entry>(), "")
+
+
+
         dataSet.color = ContextCompat.getColor(activity.baseContext, R.color.colorChartLine)
         dataSet.valueTextColor = ContextCompat.getColor(activity.baseContext, R.color.colorLightGrey)
 
@@ -60,9 +63,13 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
 
         yAxisLeft.textColor = xAxis.textColor
 
-        val data = LineData(dataSet) // Setting Data
-        chart.data = data
-        chart.animateX(2500)
+//        val data = LineData(dataSet) // Setting Data
+//         chart.data = data
+//         chart.animateX(2500)
+
+
+        chart.clear();
+
 
         chart.invalidate()  //refresh
     }

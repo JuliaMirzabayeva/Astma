@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.jjp.astma.R
+import com.example.jjp.astma.data.Quote
 import com.example.jjp.astma.modules.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_right_panel.*
 import nucleus.factory.RequiresPresenter
@@ -38,6 +39,10 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
             (activity as MainActivity).showDatePicker(calendar.get(Calendar.DAY_OF_MONTH),
                     calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.YEAR))
+        }
+
+        addQuoteButton.setOnClickListener { _ ->
+            presenter?.addQuote(Quote())
         }
     }
 

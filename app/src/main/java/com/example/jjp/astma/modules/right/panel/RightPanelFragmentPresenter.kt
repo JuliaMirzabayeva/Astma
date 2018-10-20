@@ -1,10 +1,16 @@
 package com.example.jjp.astma.modules.right.panel
 
+import android.os.Bundle
+import com.example.jjp.astma.dagger.App
+import com.example.jjp.astma.data.Quote
+import com.example.jjp.astma.models.QuotesManager
 import com.example.jjp.astma.modules.main.MainActivity
 import nucleus.presenter.Presenter
 import java.util.*
+import javax.inject.Inject
 
 class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
+    @Inject lateinit var quotesManager : QuotesManager
 
     private val dateChangeListener = object : MainActivity.DateChangeListener {
         override fun onDateChanged(day: Int, month: Int, year: Int) {
@@ -16,6 +22,11 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
         }
     }
 
+    override fun onCreate(savedState: Bundle?) {
+        super.onCreate(savedState)
+        App.component().inject(this)
+    }
+
     override fun onTakeView(view: RightPanelFragment?) {
         super.onTakeView(view)
         (view?.activity as MainActivity).addDateListener(dateChangeListener)
@@ -24,5 +35,9 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
     override fun dropView() {
         (view?.activity as MainActivity).removeDateListener(dateChangeListener)
         super.dropView()
+    }
+
+    fun addQuote(quote: Quote){
+        quotesManager.addQuote(quote)
     }
 }

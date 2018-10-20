@@ -51,7 +51,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/addPointButton"
+        android:id="@+id/addQuoteButton"
         style="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height_normal"
