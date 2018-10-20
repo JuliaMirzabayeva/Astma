@@ -33,11 +33,14 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         entries.add(Entry(2F, 2F))
         entries.add(Entry(3F, 4F))
 
-        val dataSet = LineDataSet(entries, "Customized values")
-        dataSet.color = ContextCompat.getColor(activity.baseContext, R.color.colorPrimary)
-        dataSet.valueTextColor = ContextCompat.getColor(activity.baseContext, R.color.colorPrimaryDark)
+        val dataSet = LineDataSet(entries, "")
+        dataSet.color = ContextCompat.getColor(activity.baseContext, R.color.colorChartLine)
+        dataSet.valueTextColor = ContextCompat.getColor(activity.baseContext, R.color.colorLightGrey)
 
-        val xAxis = chart.getXAxis() // Controlling X axis
+        dataSet.setDrawCircles(false)
+        dataSet.setDrawValues(false)
+
+        val xAxis = chart.xAxis // Controlling X axis
 
         xAxis.position = XAxis.XAxisPosition.BOTTOM // Set the xAxis position to bottom. Default is top
 
@@ -47,11 +50,15 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         xAxis.granularity = 1f // minimum axis-step (interval) is 1
         xAxis.valueFormatter = formatter
 
+        xAxis.textColor = ContextCompat.getColor(activity.baseContext, R.color.colorLightGrey)
+
         val yAxisRight = chart.axisRight // Controlling right side of y axis
         yAxisRight.isEnabled = false
 
         val yAxisLeft = chart.axisLeft   // Controlling left side of y axis
         yAxisLeft.granularity = 1f
+
+        yAxisLeft.textColor = xAxis.textColor
 
         val data = LineData(dataSet) // Setting Data
         chart.data = data

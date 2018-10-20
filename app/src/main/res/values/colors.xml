@@ -7,4 +7,6 @@
     <color name="colorGrey">#808080</color>
     <color name="colorGreyDark">#636363</color>
     <color name="colorError">#D25252</color>
+    <color name="colorChartLine">#EFC090</color>
+    <color name="colorChartValue">#EFC090</color>
 </resources>
