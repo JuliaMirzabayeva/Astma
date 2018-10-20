@@ -8,7 +8,7 @@ import javax.inject.Singleton
 @Singleton
 class QuotesManager
 @Inject constructor() {
-    var quoteListeners = HashSet<QuoteListener>()
+    private var quoteListeners = HashSet<QuoteListener>()
 
     interface QuoteListener {
         fun onQuoteAdded(quote: Quote)

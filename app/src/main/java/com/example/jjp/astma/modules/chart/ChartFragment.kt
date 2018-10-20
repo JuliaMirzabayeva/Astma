@@ -6,28 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.jjp.astma.R
+import com.example.jjp.astma.data.Quote
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import kotlinx.android.synthetic.main.fragment_chart.*
+import nucleus.factory.RequiresPresenter
 import nucleus.view.NucleusFragment
 import java.util.ArrayList
 
+@RequiresPresenter(ChartFragmentPresenter::class)
 class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_chart, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initChart()
-    }
-
-    private fun initChart() {
-       // val entries = ArrayList<Entry>()
+    fun initChart() {
+        // val entries = ArrayList<Entry>()
 //        entries.add(Entry(0F, 4F))
 //        entries.add(Entry(1F, 1F))
 //        entries.add(Entry(2F, 2F))
@@ -68,9 +66,13 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
 //         chart.animateX(2500)
 
 
-        chart.clear();
+        chart.clear()
 
 
         chart.invalidate()  //refresh
+    }
+
+    fun addQuote(quote: Quote) {
+
     }
 }
