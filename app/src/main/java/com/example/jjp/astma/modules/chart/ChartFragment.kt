@@ -36,42 +36,30 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         dataSet.setDrawCircles(false)
         dataSet.setDrawValues(false)
 
-        val xAxis = chart.xAxis // Controlling X axis
+        val xAxis = chart.xAxis
 
-        xAxis.position = XAxis.XAxisPosition.BOTTOM // Set the xAxis position to bottom. Default is top
-        xAxis.granularity = 1f // minimum axis-step (interval) is 1
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.granularity = 1f
         xAxis.textColor = ContextCompat.getColor(activity.baseContext, R.color.colorLightGrey)
 
-        val yAxisRight = chart.axisRight // Controlling right side of y axis
+        val yAxisRight = chart.axisRight
         yAxisRight.isEnabled = false
 
-        val yAxisLeft = chart.axisLeft   // Controlling left side of y axis
+        val yAxisLeft = chart.axisLeft
         yAxisLeft.granularity = 1f
 
         yAxisLeft.textColor = xAxis.textColor
 
-        val data = LineData(dataSet) // Setting Data
+        val data = LineData(dataSet)
         chart.data = data
         chart.animateX(2500)
 
-        chart.invalidate()  //refresh
+        chart.invalidate()
     }
 
     fun addQuote(quote: Quote) {
-        val entries = ArrayList<Entry>()
-        entries.add(Entry(quote.date.day.toFloat(), quote.value.toFloat()))
-        val dataSet = LineDataSet(entries, "")
-        chart.data.addDataSet(dataSet)
+        chart.data.addEntry(Entry(quote.date.day.toFloat(), quote.value.toFloat()), 0)
         chart.notifyDataSetChanged()
         chart.invalidate()
-
-    }
-
-    private fun setDataSetParameters(dataSet: LineDataSet){
-        dataSet.color = ContextCompat.getColor(activity.baseContext, R.color.colorChartLine)
-        dataSet.valueTextColor = ContextCompat.getColor(activity.baseContext, R.color.colorLightGrey)
-
-        dataSet.setDrawCircles(false)
-        dataSet.setDrawValues(false)
     }
 }
