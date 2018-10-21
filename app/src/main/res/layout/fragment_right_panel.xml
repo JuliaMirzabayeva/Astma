@@ -75,6 +75,7 @@
         android:hint="@string/exhale"
         android:cursorVisible="false"
         android:inputType="number"
+        android:imeOptions="flagNoExtractUi"
         android:textColor="@color/colorLightGrey"
         android:textColorHint="@color/colorGreyDark"
         android:textSize="@dimen/text_size_normal" />
