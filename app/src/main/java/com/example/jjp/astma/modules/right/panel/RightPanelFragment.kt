@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.jjp.astma.R
 import com.example.jjp.astma.data.Quote
+import com.example.jjp.astma.data.QuoteDate
 import com.example.jjp.astma.modules.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_right_panel.*
 import nucleus.factory.RequiresPresenter
@@ -34,16 +35,31 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
         }
 
         dateLabel.setOnClickListener { _ ->
-            val calendar = Calendar.getInstance()
-            calendar.time = getSimpleDayFormat().parse(dateLabel.text.toString())
+            val calendar = getCalendar()
             (activity as MainActivity).showDatePicker(calendar.get(Calendar.DAY_OF_MONTH),
                     calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.YEAR))
         }
 
         addQuoteButton.setOnClickListener { _ ->
-            presenter?.addQuote(Quote())
+            val value = valueLabel.text.toString().toLongOrNull()
+            if (value != null) {
+                val calendar = getCalendar()
+                val date = QuoteDate(calendar.get(Calendar.DAY_OF_MONTH),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.YEAR))
+                val period: Quote.DayPeriod = if (morningButton.isSelected) Quote.DayPeriod.MORNING else Quote.DayPeriod.EVENING
+                presenter?.addQuote(Quote(value, date, period))
+            } else {
+                (activity as MainActivity).showError(activity.baseContext.getString(R.string.exhale_error))
+            }
         }
+    }
+
+    private fun getCalendar(): Calendar {
+        val calendar = Calendar.getInstance()
+        calendar.time = getSimpleDayFormat().parse(dateLabel.text.toString())
+        return calendar
     }
 
     private fun setDefaultDate() {

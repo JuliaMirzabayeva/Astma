@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import com.example.jjp.astma.R
 import com.example.jjp.astma.modules.chart.ChartFragment
 import com.example.jjp.astma.modules.right.panel.RightPanelFragment
+import android.support.design.widget.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -52,5 +54,13 @@ class MainActivity : AppCompatActivity() {
 
     fun removeDateListener(listener: DateChangeListener) {
         dateChangeListeners.remove(listener)
+    }
+
+    fun showError(error : String){
+        Snackbar.make(
+                rootLayout,
+                error,
+                Snackbar.LENGTH_SHORT
+        ).show()
     }
 }

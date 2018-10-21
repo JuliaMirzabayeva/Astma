@@ -58,13 +58,20 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
     }
 
     fun addQuote(quote: Quote) {
-
         val entries = ArrayList<Entry>()
-        entries.add(Entry(4F, 4F))
+        entries.add(Entry(quote.date.day.toFloat(), quote.value.toFloat()))
         val dataSet = LineDataSet(entries, "")
         chart.data.addDataSet(dataSet)
         chart.notifyDataSetChanged()
         chart.invalidate()
 
+    }
+
+    private fun setDataSetParameters(dataSet: LineDataSet){
+        dataSet.color = ContextCompat.getColor(activity.baseContext, R.color.colorChartLine)
+        dataSet.valueTextColor = ContextCompat.getColor(activity.baseContext, R.color.colorLightGrey)
+
+        dataSet.setDrawCircles(false)
+        dataSet.setDrawValues(false)
     }
 }
