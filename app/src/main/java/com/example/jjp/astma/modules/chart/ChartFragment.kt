@@ -25,15 +25,10 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
     }
 
     fun initChart() {
-        // val entries = ArrayList<Entry>()
-//        entries.add(Entry(0F, 4F))
-//        entries.add(Entry(1F, 1F))
-//        entries.add(Entry(2F, 2F))
-//        entries.add(Entry(3F, 4F))
+        val entries = ArrayList<Entry>()
+        entries.add(Entry(1F, 1F))
 
-        val dataSet = LineDataSet(ArrayList<Entry>(), "")
-
-
+        val dataSet = LineDataSet(entries, "")
 
         dataSet.color = ContextCompat.getColor(activity.baseContext, R.color.colorChartLine)
         dataSet.valueTextColor = ContextCompat.getColor(activity.baseContext, R.color.colorLightGrey)
@@ -44,13 +39,7 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         val xAxis = chart.xAxis // Controlling X axis
 
         xAxis.position = XAxis.XAxisPosition.BOTTOM // Set the xAxis position to bottom. Default is top
-
-        val months = arrayOf("Jan", "Feb", "Mar", "Apr") //Customizing x axis value
-
-        val formatter = IAxisValueFormatter { value, axis -> months[value.toInt()] }
         xAxis.granularity = 1f // minimum axis-step (interval) is 1
-        xAxis.valueFormatter = formatter
-
         xAxis.textColor = ContextCompat.getColor(activity.baseContext, R.color.colorLightGrey)
 
         val yAxisRight = chart.axisRight // Controlling right side of y axis
@@ -61,18 +50,21 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
 
         yAxisLeft.textColor = xAxis.textColor
 
-//        val data = LineData(dataSet) // Setting Data
-//         chart.data = data
-//         chart.animateX(2500)
-
-
-        chart.clear()
-
+        val data = LineData(dataSet) // Setting Data
+        chart.data = data
+        chart.animateX(2500)
 
         chart.invalidate()  //refresh
     }
 
     fun addQuote(quote: Quote) {
+
+        val entries = ArrayList<Entry>()
+        entries.add(Entry(4F, 4F))
+        val dataSet = LineDataSet(entries, "")
+        chart.data.addDataSet(dataSet)
+        chart.notifyDataSetChanged()
+        chart.invalidate()
 
     }
 }
