@@ -12,6 +12,6 @@
         android:layout_centerInParent="true"
         android:textColor="@color/colorLightGrey"
         android:textSize="16sp"
-        android:text="Февраль 2018" />
+        tools:text="Февраль 2018" />
 
 </RelativeLayout>
