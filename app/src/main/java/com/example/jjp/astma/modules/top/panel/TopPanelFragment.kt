@@ -23,22 +23,27 @@ class TopPanelFragment : NucleusFragment<TopPanelFragmentPresenter>() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setDefaultPickerDate()
         chartDateLabel.setOnClickListener { _ -> openMonthYearPicker() }
     }
 
-    private fun setDefaultPickerDate(){
-
+    private fun setDefaultPickerDate() {
+        val calendar = Calendar.getInstance()
+        setPickerText(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH))
     }
 
     private fun openMonthYearPicker() {
         picker = YearMonthPickerDialog(activity, YearMonthPickerDialog.OnDateSetListener { year, month ->
-            val calendar = Calendar.getInstance()
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month)
-            val simpleDateFormat = SimpleDateFormat("LLLL yyyy", Locale("ru"))
-            chartDateLabel.text = simpleDateFormat.format(calendar.time)
+            setPickerText(year, month)
         })
         picker?.show()
+    }
+
+    private fun setPickerText(year: Int, month: Int) {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.YEAR, year)
+        calendar.set(Calendar.MONTH, month)
+        val simpleDateFormat = SimpleDateFormat("LLLL yyyy", Locale("ru"))
+        chartDateLabel.text = simpleDateFormat.format(calendar.time)
     }
 }
