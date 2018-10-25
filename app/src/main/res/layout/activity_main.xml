@@ -7,6 +7,22 @@
     android:background="@color/colorPrimary">
 
     <RelativeLayout
+        android:id="@+id/topPanelContainer"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_toStartOf="@+id/rightPanelSeparator">
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/topPanelSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/separator_size"
+        android:background="@color/colorGreyDark"
+        android:layout_toStartOf="@+id/rightPanelSeparator"
+        android:layout_below="@id/topPanelContainer"/>
+
+    <RelativeLayout
         android:id="@+id/rightPanelContainer"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -17,10 +33,10 @@
 
     <View
         android:id="@+id/rightPanelSeparator"
-        android:layout_width="@dimen/separator_width"
+        android:layout_width="@dimen/separator_size"
         android:layout_height="match_parent"
         android:layout_toStartOf="@id/rightPanelContainer"
-        android:background="@color/colorGreyDark" />
+        android:background="@color/colorGreyDark"/>
 
     <LinearLayout
         android:id="@+id/chartContainer"
@@ -28,6 +44,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/rightPanelSeparator"
+        android:layout_below="@id/topPanelSeparator"
         android:orientation="horizontal"/>
 
 </RelativeLayout>

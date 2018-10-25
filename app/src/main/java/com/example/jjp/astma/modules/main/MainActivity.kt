@@ -7,6 +7,7 @@ import com.example.jjp.astma.R
 import com.example.jjp.astma.modules.chart.ChartFragment
 import com.example.jjp.astma.modules.right.panel.RightPanelFragment
 import android.support.design.widget.Snackbar
+import com.example.jjp.astma.modules.top.panel.TopPanelFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -22,11 +23,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         inflateRightPanel()
+        inflateTopPanel()
         inflateChart()
     }
 
     private fun inflateRightPanel() {
         inflateFragment(R.id.rightPanelContainer, RightPanelFragment())
+    }
+
+    private fun inflateTopPanel() {
+        inflateFragment(R.id.topPanelContainer, TopPanelFragment())
     }
 
     private fun inflateChart() {
