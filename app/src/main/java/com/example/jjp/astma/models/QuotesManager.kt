@@ -12,6 +12,7 @@ class QuotesManager
 
     interface QuoteListener {
         fun onQuoteAdded(quote: Quote)
+        fun onQuotesRangeChanged(maxRange : Int)
     }
 
     fun addQuoteListener(listener: QuoteListener) {
@@ -24,5 +25,9 @@ class QuotesManager
 
     fun addQuote(quote: Quote) {
         quoteListeners.forEach { it.onQuoteAdded(quote) }
+    }
+
+    fun changeQuotesRange(maxRange: Int){
+        quoteListeners.forEach { it.onQuotesRangeChanged(maxRange) }
     }
 }

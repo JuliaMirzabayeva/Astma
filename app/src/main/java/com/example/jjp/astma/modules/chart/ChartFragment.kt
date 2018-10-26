@@ -11,7 +11,6 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import kotlinx.android.synthetic.main.fragment_chart.*
 import nucleus.factory.RequiresPresenter
 import nucleus.view.NucleusFragment
@@ -60,6 +59,11 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
     fun addQuote(quote: Quote) {
         chart.data.addEntry(Entry(quote.date.day.toFloat(), quote.value.toFloat()), 0)
         chart.notifyDataSetChanged()
+        chart.invalidate()
+    }
+
+    fun setXRange(maxX: Int) {
+        chart.setVisibleXRange(1F, maxX.toFloat())
         chart.invalidate()
     }
 }

@@ -15,7 +15,6 @@ import java.util.*
 
 @RequiresPresenter(TopPanelFragmentPresenter::class)
 class TopPanelFragment : NucleusFragment<TopPanelFragmentPresenter>() {
-    private var picker: YearMonthPickerDialog? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_top_panel, container, false)
@@ -33,17 +32,23 @@ class TopPanelFragment : NucleusFragment<TopPanelFragmentPresenter>() {
     }
 
     private fun openMonthYearPicker() {
-        picker = YearMonthPickerDialog(activity, YearMonthPickerDialog.OnDateSetListener { year, month ->
+        YearMonthPickerDialog(activity, YearMonthPickerDialog.OnDateSetListener { year, month ->
             setPickerText(year, month)
-        })
-        picker?.show()
+            val daysInMonth = getCalendar(year, month).getActualMaximum(Calendar.DAY_OF_MONTH)
+            presenter?.changeQuotesRange(daysInMonth)
+        }).show()
     }
 
     private fun setPickerText(year: Int, month: Int) {
+        val calendar = getCalendar(year, month)
+        val simpleDateFormat = SimpleDateFormat("LLLL yyyy", Locale("ru"))
+        chartDateLabel.text = simpleDateFormat.format(calendar.time)
+    }
+
+    private fun getCalendar(year: Int, month: Int): Calendar {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.YEAR, year)
         calendar.set(Calendar.MONTH, month)
-        val simpleDateFormat = SimpleDateFormat("LLLL yyyy", Locale("ru"))
-        chartDateLabel.text = simpleDateFormat.format(calendar.time)
+        return calendar
     }
 }

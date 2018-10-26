@@ -8,11 +8,16 @@ import nucleus.presenter.Presenter
 import javax.inject.Inject
 
 class ChartFragmentPresenter : Presenter<ChartFragment>() {
-    @Inject lateinit var quotesManager: QuotesManager
+    @Inject
+    lateinit var quotesManager: QuotesManager
 
     private val quotesListener = object : QuotesManager.QuoteListener {
         override fun onQuoteAdded(quote: Quote) {
             view?.addQuote(quote)
+        }
+
+        override fun onQuotesRangeChanged(maxRange: Int) {
+            view?.setXRange(maxRange)
         }
     }
 

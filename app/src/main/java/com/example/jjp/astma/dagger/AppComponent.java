@@ -2,6 +2,7 @@ package com.example.jjp.astma.dagger;
 
 import com.example.jjp.astma.modules.chart.ChartFragmentPresenter;
 import com.example.jjp.astma.modules.right.panel.RightPanelFragmentPresenter;
+import com.example.jjp.astma.modules.top.panel.TopPanelFragmentPresenter;
 
 import javax.inject.Singleton;
 
@@ -14,6 +15,7 @@ public interface AppComponent extends AndroidInjector<App> {
 
     void inject(RightPanelFragmentPresenter rightPanelFragmentPresenter);
     void inject(ChartFragmentPresenter chartFragmentPresenter);
+    void inject(TopPanelFragmentPresenter topPanelFragmentPresenter);
 
     final class Initializer {
         private Initializer() {
