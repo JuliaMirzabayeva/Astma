@@ -32,7 +32,6 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         dataSet.color = ContextCompat.getColor(activity.baseContext, R.color.colorChartLine)
         dataSet.valueTextColor = ContextCompat.getColor(activity.baseContext, R.color.colorLightGrey)
 
-        dataSet.setDrawCircles(false)
         dataSet.setDrawValues(false)
 
         val xAxis = chart.xAxis
@@ -63,7 +62,8 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
     }
 
     fun setXRange(maxX: Int) {
-        chart.setVisibleXRange(1F, maxX.toFloat())
+        chart.xAxis.axisMinimum = 1F
+        chart.xAxis.axisMaximum = maxX.toFloat()
         chart.invalidate()
     }
 }
