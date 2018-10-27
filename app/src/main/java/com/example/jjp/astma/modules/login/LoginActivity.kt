@@ -16,6 +16,8 @@ class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
         setContentView(R.layout.activity_login)
 
         signUpButton.setOnClickListener { if (validateLoginFields()) goToChartActivity() }
+
+        signInButton.setOnClickListener { goToChartActivity() }
     }
 
     private fun validateLoginFields(): Boolean {

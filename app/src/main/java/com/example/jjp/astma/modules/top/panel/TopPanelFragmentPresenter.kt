@@ -14,6 +14,12 @@ class TopPanelFragmentPresenter : Presenter<TopPanelFragment>() {
         App.component().inject(this)
     }
 
+    override fun onTakeView(view: TopPanelFragment?) {
+        super.onTakeView(view)
+        view?.setDefaultPickerDate()
+        view?.setDefaultQuotesRange()
+    }
+
     fun changeQuotesRange(maxRange : Int){
         quotesManager.changeQuotesRange(maxRange)
     }
