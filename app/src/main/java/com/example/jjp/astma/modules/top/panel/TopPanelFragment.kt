@@ -9,7 +9,6 @@ import com.example.jjp.astma.modules.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_top_panel.*
 import nucleus.factory.RequiresPresenter
 import nucleus.view.NucleusFragment
-import com.twinkle94.monthyearpicker.picker.YearMonthPickerDialog
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,10 +37,7 @@ class TopPanelFragment : NucleusFragment<TopPanelFragmentPresenter>() {
     }
 
     private fun openMonthYearPicker() {
-        YearMonthPickerDialog(activity, YearMonthPickerDialog.OnDateSetListener { year, month ->
-            setPickerText(year, month)
-            changeQuotesRange(year, month)
-        }).show()
+        (activity as MainActivity).showMonthYearPicker(1,2018)
     }
 
     private fun changeQuotesRange(year: Int, month: Int){

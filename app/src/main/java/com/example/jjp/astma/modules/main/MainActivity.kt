@@ -7,6 +7,8 @@ import com.example.jjp.astma.R
 import com.example.jjp.astma.modules.chart.ChartFragment
 import com.example.jjp.astma.modules.right.panel.RightPanelFragment
 import android.support.design.widget.Snackbar
+import com.example.jjp.astma.modules.main.pickers.DatePicker
+import com.example.jjp.astma.modules.main.pickers.MonthYearPicker
 import com.example.jjp.astma.modules.profile.ProfileFragment
 import com.example.jjp.astma.modules.top.panel.TopPanelFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -40,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         inflateFragment(R.id.chartContainer, ChartFragment())
     }
 
-    fun inflateProfile(){
+    fun inflateProfile() {
         inflateFragment(R.id.rootLayout, ProfileFragment())
     }
 
@@ -51,8 +53,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showDatePicker(day: Int, month: Int, year: Int) {
-        val datePickerFragment = DatePickerFragment.createNewInstance(day, month, year)
-        datePickerFragment.show(supportFragmentManager, DatePickerFragment.DATE_PICKER_TAG)
+        val datePicker = DatePicker.createNewInstance(day, month, year)
+        datePicker.show(supportFragmentManager, DatePicker.DATE_PICKER_TAG)
+    }
+
+    fun showMonthYearPicker(month: Int, year: Int) {
+        val monthYearPicker = MonthYearPicker.createNewInstance(month, year)
+        monthYearPicker.show(supportFragmentManager, MonthYearPicker.MONTH_YEAR_PICKER_TAG)
     }
 
     fun setSelectedDate(day: Int, month: Int, year: Int) {
@@ -67,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         dateChangeListeners.remove(listener)
     }
 
-    fun showError(error : String){
+    fun showError(error: String) {
         Snackbar.make(
                 rootLayout,
                 error,
