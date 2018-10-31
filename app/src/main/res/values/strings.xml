@@ -2,7 +2,7 @@
     <string name="app_name">Astma</string>
     <!-- Strings related to login -->
     <string name="email">Почта</string>
-    <string name="device_code">Код устройства</string>
+    <string name="password">Пароль</string>
     <string name="sign_in">Войти</string>
     <string name="sign_up">Зарегестрироваться</string>
     <string name="error_invalid_device_code">Код устройстрва должен содержать 10 символов</string>

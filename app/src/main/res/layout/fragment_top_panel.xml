@@ -5,6 +5,14 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
+    <ImageView
+        android:id="@+id/menuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_menu"
+        android:layout_centerVertical="true"
+        android:padding="@dimen/normal_margin"/>
+
     <TextView
         android:id="@+id/chartDateLabel"
         android:layout_width="wrap_content"

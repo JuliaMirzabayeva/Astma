@@ -7,6 +7,7 @@ import com.example.jjp.astma.R
 import com.example.jjp.astma.modules.chart.ChartFragment
 import com.example.jjp.astma.modules.right.panel.RightPanelFragment
 import android.support.design.widget.Snackbar
+import com.example.jjp.astma.modules.profile.ProfileFragment
 import com.example.jjp.astma.modules.top.panel.TopPanelFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun inflateChart() {
         inflateFragment(R.id.chartContainer, ChartFragment())
+    }
+
+    fun inflateProfile(){
+        inflateFragment(R.id.rootLayout, ProfileFragment())
     }
 
     private fun inflateFragment(container: Int, fragment: Fragment) {

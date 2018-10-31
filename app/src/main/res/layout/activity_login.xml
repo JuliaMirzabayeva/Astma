@@ -44,7 +44,7 @@
                 android:id="@+id/deviceCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/device_code"
+                android:hint="@string/password"
                 android:imeOptions="actionDone"
                 android:inputType="numberDecimal"
                 android:maxLines="1"

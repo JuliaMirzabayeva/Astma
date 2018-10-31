@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.jjp.astma.R
+import com.example.jjp.astma.modules.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_top_panel.*
 import nucleus.factory.RequiresPresenter
 import nucleus.view.NucleusFragment
@@ -23,6 +24,7 @@ class TopPanelFragment : NucleusFragment<TopPanelFragmentPresenter>() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         chartDateLabel.setOnClickListener { _ -> openMonthYearPicker() }
+        menuButton.setOnClickListener { _ -> (activity as MainActivity).inflateProfile() }
     }
 
     fun setDefaultPickerDate() {
