@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     interface DateChangeListener {
         fun onDateChanged(day: Int, month: Int, year: Int)
+        fun onDateChanged(month: Int, year: Int)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +65,10 @@ class MainActivity : AppCompatActivity() {
 
     fun setSelectedDate(day: Int, month: Int, year: Int) {
         dateChangeListeners.forEach { it -> it.onDateChanged(day, month, year) }
+    }
+
+    fun setSelectedDate(month: Int, year: Int) {
+        dateChangeListeners.forEach { it -> it.onDateChanged(month, year) }
     }
 
     fun addDateListener(listener: DateChangeListener) {

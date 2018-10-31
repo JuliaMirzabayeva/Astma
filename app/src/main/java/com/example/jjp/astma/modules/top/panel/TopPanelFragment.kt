@@ -31,30 +31,47 @@ class TopPanelFragment : NucleusFragment<TopPanelFragmentPresenter>() {
         setPickerText(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH))
     }
 
-    fun setDefaultQuotesRange(){
+    fun setDefaultQuotesRange() {
         val calendar = Calendar.getInstance()
         changeQuotesRange(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH))
     }
 
     private fun openMonthYearPicker() {
-        (activity as MainActivity).showMonthYearPicker(1,2018)
+        val calendar = getCalendar()
+        (activity as MainActivity).showMonthYearPicker(calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.YEAR))
     }
 
-    private fun changeQuotesRange(year: Int, month: Int){
+    private fun changeQuotesRange(year: Int, month: Int) {
         val daysInMonth = getCalendar(year, month).getActualMaximum(Calendar.DAY_OF_MONTH)
         presenter?.changeQuotesRange(daysInMonth)
     }
 
-    private fun setPickerText(year: Int, month: Int) {
+    fun setPickerText(year: Int, month: Int) {
         val calendar = getCalendar(year, month)
-        val simpleDateFormat = SimpleDateFormat("LLLL yyyy", Locale("ru"))
+        val simpleDateFormat = getSimpleDayFormat()
         chartDateLabel.text = simpleDateFormat.format(calendar.time)
+    }
+
+    private fun getSimpleDayFormat(): SimpleDateFormat {
+        return SimpleDateFormat("LLLL yyyy", Locale("ru"))
     }
 
     private fun getCalendar(year: Int, month: Int): Calendar {
         val calendar = Calendar.getInstance()
-        calendar.set(Calendar.YEAR, year)
+        calendar.set(Calendar.DAY_OF_MONTH, DEFAULT_DAY)
         calendar.set(Calendar.MONTH, month)
+        calendar.set(Calendar.YEAR, year)
         return calendar
+    }
+
+    private fun getCalendar(): Calendar {
+        val calendar = Calendar.getInstance()
+        calendar.time = getSimpleDayFormat().parse(chartDateLabel.text.toString())
+        return calendar
+    }
+
+    companion object {
+        const val DEFAULT_DAY = 1
     }
 }

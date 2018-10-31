@@ -20,6 +20,10 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
             calendar.set(Calendar.YEAR, year)
             view?.setDate(calendar.time)
         }
+
+        override fun onDateChanged(month: Int, year: Int) {
+
+        }
     }
 
     override fun onCreate(savedState: Bundle?) {
