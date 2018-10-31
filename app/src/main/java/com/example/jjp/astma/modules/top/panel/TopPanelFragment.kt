@@ -22,8 +22,8 @@ class TopPanelFragment : NucleusFragment<TopPanelFragmentPresenter>() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        chartDateLabel.setOnClickListener { _ -> openMonthYearPicker() }
-        menuButton.setOnClickListener { _ -> (activity as MainActivity).inflateProfile() }
+        chartDateLabel.setOnClickListener { openMonthYearPicker() }
+        menuButton.setOnClickListener { (activity as MainActivity).inflateProfile() }
     }
 
     fun setDefaultPickerDate() {
@@ -42,13 +42,13 @@ class TopPanelFragment : NucleusFragment<TopPanelFragmentPresenter>() {
                 calendar.get(Calendar.YEAR))
     }
 
-    private fun changeQuotesRange(year: Int, month: Int) {
-        val daysInMonth = getCalendar(year, month).getActualMaximum(Calendar.DAY_OF_MONTH)
+    fun changeQuotesRange(year: Int, month: Int) {
+        val daysInMonth = presenter.getCalendar(year, month).getActualMaximum(Calendar.DAY_OF_MONTH)
         presenter?.changeQuotesRange(daysInMonth)
     }
 
     fun setPickerText(year: Int, month: Int) {
-        val calendar = getCalendar(year, month)
+        val calendar = presenter.getCalendar(year, month)
         val simpleDateFormat = getSimpleDayFormat()
         chartDateLabel.text = simpleDateFormat.format(calendar.time)
     }
@@ -57,21 +57,9 @@ class TopPanelFragment : NucleusFragment<TopPanelFragmentPresenter>() {
         return SimpleDateFormat("LLLL yyyy", Locale("ru"))
     }
 
-    private fun getCalendar(year: Int, month: Int): Calendar {
-        val calendar = Calendar.getInstance()
-        calendar.set(Calendar.DAY_OF_MONTH, DEFAULT_DAY)
-        calendar.set(Calendar.MONTH, month)
-        calendar.set(Calendar.YEAR, year)
-        return calendar
-    }
-
     private fun getCalendar(): Calendar {
         val calendar = Calendar.getInstance()
         calendar.time = getSimpleDayFormat().parse(chartDateLabel.text.toString())
         return calendar
-    }
-
-    companion object {
-        const val DEFAULT_DAY = 1
     }
 }

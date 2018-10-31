@@ -14,10 +14,7 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
 
     private val dateChangeListener = object : MainActivity.DateChangeListener {
         override fun onDateChanged(day: Int, month: Int, year: Int) {
-            val calendar = Calendar.getInstance()
-            calendar.set(Calendar.DAY_OF_MONTH, day)
-            calendar.set(Calendar.MONTH, month)
-            calendar.set(Calendar.YEAR, year)
+            val calendar = getCalendar(day, year, month)
             view?.setDate(calendar.time)
         }
 
@@ -43,5 +40,13 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
 
     fun addQuote(quote: Quote){
         quotesManager.addQuote(quote)
+    }
+
+    private fun getCalendar(day : Int, year: Int, month: Int): Calendar {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.DAY_OF_MONTH, day)
+        calendar.set(Calendar.MONTH, month)
+        calendar.set(Calendar.YEAR, year)
+        return calendar
     }
 }
