@@ -15,29 +15,31 @@ class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        signUpButton.setOnClickListener { if (validateLoginFields()) goToChartActivity() }
+        // signUpButton.setOnClickListener { if (validateLoginFields())  }
 
-        signInButton.setOnClickListener { goToChartActivity() }
-    }
-
-    private fun validateLoginFields(): Boolean {
-        emailLayout.error = if (email.text.isEmpty()) getString(R.string.error_field_required) else null
-        deviceCodeLayout.error = when {
-            deviceCode.text.isEmpty() -> getString(R.string.error_field_required)
-            deviceCode.text.length != DEVICE_CODE_LENGTH -> getString(R.string.error_invalid_device_code)
-            else -> null
+        signInButton.setOnClickListener {
+            presenter.signInUser(email.text.toString(), password.text.toString())
         }
-        return emailLayout.error == null && deviceCode.error == null
     }
 
-    private fun goToChartActivity() {
+//    private fun validateLoginFields(): Boolean {
+//        emailLayout.error = if (email.text.isEmpty()) getString(R.string.error_field_required) else null
+//        passwordLayout.error = when {
+//            password.text.isEmpty() -> getString(R.string.error_field_required)
+//            password.text.length != DEVICE_CODE_LENGTH -> getString(R.string.error_invalid_device_code)
+//            else -> null
+//        }
+//        return emailLayout.error == null && password.error == null
+//    }
+
+    fun goToChartActivity() {
         val intent = Intent(this.baseContext, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
 
     companion object {
-        const val DEVICE_CODE_LENGTH = 10
+        //const val DEVICE_CODE_LENGTH = 10
     }
 }
 

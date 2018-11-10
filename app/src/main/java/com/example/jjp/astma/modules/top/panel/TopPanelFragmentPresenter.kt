@@ -9,8 +9,7 @@ import java.util.*
 import javax.inject.Inject
 
 class TopPanelFragmentPresenter : Presenter<TopPanelFragment>() {
-    @Inject
-    lateinit var quotesManager: QuotesManager
+    @Inject lateinit var quotesManager: QuotesManager
 
     private val dateChangeListener = object : MainActivity.DateChangeListener {
         override fun onDateChanged(day: Int, month: Int, year: Int) {}
