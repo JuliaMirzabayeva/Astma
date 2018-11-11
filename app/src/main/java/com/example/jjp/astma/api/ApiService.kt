@@ -7,6 +7,6 @@ import retrofit2.Call
 import retrofit2.http.Body
 
 interface ApiService {
-    @POST("api/Login")
+    @POST("api/login")
     fun signIn(@Body request: SignInRequest): Call<SignInResponse>
 }

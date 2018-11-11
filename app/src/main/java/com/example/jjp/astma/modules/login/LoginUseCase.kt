@@ -8,7 +8,7 @@ import com.example.jjp.astma.models.login.LoginRepository
 class LoginUseCase(private val loginRepository: LoginRepository) {
     fun signInUser(signInRequest: SignInRequest,
                    onResult: (User) -> Unit,
-                   onFailure: (Throwable?) -> Unit) {
+                   onFailure: ((Throwable?) -> Unit)? = null) {
 
         loginRepository.signInUser(signInRequest, object : ModelLoadingListener<User> {
             override fun onModelLoaded(model: User) {
@@ -16,7 +16,7 @@ class LoginUseCase(private val loginRepository: LoginRepository) {
             }
 
             override fun onModelFailure(error: Throwable?) {
-                onFailure(error)
+                onFailure?.invoke(error)
             }
         })
     }
