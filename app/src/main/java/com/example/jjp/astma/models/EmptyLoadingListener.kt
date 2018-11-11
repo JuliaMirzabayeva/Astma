@@ -1,7 +1,7 @@
 package com.example.jjp.astma.models
 
-interface ModelLoadingListener<T> {
-    fun onModelLoaded(model: T)
+interface EmptyLoadingListener {
+    fun onModelLoaded()
 
     fun onModelFailure(error: Throwable?)
 }

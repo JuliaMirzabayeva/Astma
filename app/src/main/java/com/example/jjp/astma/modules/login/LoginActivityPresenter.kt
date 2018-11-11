@@ -3,7 +3,6 @@ package com.example.jjp.astma.modules.login
 import android.os.Bundle
 import com.example.jjp.astma.api.request.SignInRequest
 import com.example.jjp.astma.dagger.App
-import com.example.jjp.astma.data.User
 import com.example.jjp.astma.models.login.LoginRepository
 import nucleus.presenter.Presenter
 import javax.inject.Inject
@@ -13,7 +12,7 @@ class LoginActivityPresenter : Presenter<LoginActivity>() {
 
     private var loginUseCase: LoginUseCase? = null
 
-    private val onResult: (user: User) -> Unit = {
+    private val onResult: () -> Unit = {
         view?.goToChartActivity()
     }
 
