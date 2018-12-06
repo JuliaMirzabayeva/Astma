@@ -1,4 +1,4 @@
-package com.example.jjp.astma.models
+package com.example.jjp.astma.models.listeners
 
 interface EmptyLoadingListener {
     fun onModelLoaded()

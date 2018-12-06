@@ -1,9 +1,3 @@
 package com.example.jjp.astma.data
 
-class Quote(var value: Long, var date: QuoteDate, var dayPeriod: DayPeriod) {
-
-    enum class DayPeriod {
-        MORNING,
-        EVENING
-    }
-}
+class Quote(var value: Int, var date: QuoteDate, var isMorning: Boolean)

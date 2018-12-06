@@ -42,14 +42,13 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
         }
 
         addQuoteButton.setOnClickListener { _ ->
-            val value = valueLabel.text.toString().toLongOrNull()
+            val value = valueLabel.text.toString().toIntOrNull()
             if (value != null) {
                 val calendar = getCalendar()
                 val date = QuoteDate(calendar.get(Calendar.DAY_OF_MONTH),
                         calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.YEAR))
-                val period: Quote.DayPeriod = if (morningButton.isSelected) Quote.DayPeriod.MORNING else Quote.DayPeriod.EVENING
-                presenter?.addQuote(Quote(value, date, period))
+                presenter?.addQuote(Quote(value, date, morningButton.isSelected))
             } else {
                 (activity as MainActivity).showError(activity.baseContext.getString(R.string.exhale_error))
             }
@@ -77,5 +76,9 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
 
     private fun getSimpleDayFormat(): SimpleDateFormat {
         return SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+    }
+
+    fun showNetworkError(){
+        (activity as MainActivity).showError(getString(R.string.network_error))
     }
 }

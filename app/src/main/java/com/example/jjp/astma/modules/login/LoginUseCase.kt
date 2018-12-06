@@ -1,7 +1,7 @@
 package com.example.jjp.astma.modules.login
 
 import com.example.jjp.astma.api.request.SignInRequest
-import com.example.jjp.astma.models.EmptyLoadingListener
+import com.example.jjp.astma.models.listeners.EmptyLoadingListener
 import com.example.jjp.astma.models.login.LoginRepository
 
 class LoginUseCase(private val loginRepository: LoginRepository) {
