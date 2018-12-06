@@ -7,17 +7,17 @@ import com.example.jjp.astma.data.Quote
 import com.example.jjp.astma.models.QuotesManager
 import com.example.jjp.astma.models.quotes.QuotesRepository
 import com.example.jjp.astma.modules.main.MainActivity
+import com.example.jjp.astma.preferences.CommonPreferencesHelper
 import nucleus.presenter.Presenter
 import java.util.*
 import javax.inject.Inject
 
 class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
-    @Inject
-    lateinit var quotesManager: QuotesManager
-    @Inject
-    lateinit var quotesRepository: QuotesRepository
+    @Inject lateinit var quotesManager: QuotesManager
+    @Inject lateinit var quotesRepository: QuotesRepository
 
     private var rightPanelUseCase: RightPanelUseCase? = null
+    private var commonPreferencesHelper : CommonPreferencesHelper? =  null
 
     private val dateChangeListener = object : MainActivity.DateChangeListener {
         override fun onDateChanged(day: Int, month: Int, year: Int) {
@@ -47,6 +47,7 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
     override fun onTakeView(view: RightPanelFragment?) {
         super.onTakeView(view)
         (view?.activity as MainActivity).addDateListener(dateChangeListener)
+        commonPreferencesHelper = CommonPreferencesHelper(view.activity.baseContext)
     }
 
     override fun dropView() {
@@ -60,7 +61,9 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
     }
 
     private fun addQuote(value: Int, date: Date, isMorning: Boolean) {
-        rightPanelUseCase?.addQuote(QuoteRequest(value, date, isMorning, "5afc7701-a637-436e-953a-7744e77095df"), onResult, onFailure)
+        commonPreferencesHelper?.let {
+            rightPanelUseCase?.addQuote(QuoteRequest(value, date, isMorning, it.userToken), onResult, onFailure)
+        }
     }
 
     private fun getCalendar(day: Int, year: Int, month: Int): Calendar {
