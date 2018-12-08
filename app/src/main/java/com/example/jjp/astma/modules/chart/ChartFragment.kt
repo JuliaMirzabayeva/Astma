@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.jjp.astma.R
 import com.example.jjp.astma.data.Quote
+import com.example.jjp.astma.modules.main.MainActivity
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -65,5 +66,9 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         chart.xAxis.axisMinimum = 1F
         chart.xAxis.axisMaximum = maxX.toFloat()
         chart.invalidate()
+    }
+
+    fun showError(error: String? = null) {
+        (activity as MainActivity).showError(error ?: getString(R.string.network_error))
     }
 }
