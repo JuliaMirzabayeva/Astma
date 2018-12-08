@@ -7,7 +7,7 @@ import android.preference.PreferenceManager
 class CommonPreferencesHelper(context: Context) : Preferences {
     private val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    var userToken = preferences.getString(USER_TOKEN, null)
+    var userToken : String? = preferences.getString(USER_TOKEN, null)
         set(value) = preferences.edit().putString(USER_TOKEN, value).apply()
 
     override fun clear() {

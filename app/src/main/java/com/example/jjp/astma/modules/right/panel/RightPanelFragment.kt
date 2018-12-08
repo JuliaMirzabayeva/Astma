@@ -78,7 +78,7 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
         return SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
     }
 
-    fun showNetworkError(){
-        (activity as MainActivity).showError(getString(R.string.network_error))
+    fun showError(error: String? = null) {
+        (activity as MainActivity).showError(error ?: getString(R.string.network_error))
     }
 }

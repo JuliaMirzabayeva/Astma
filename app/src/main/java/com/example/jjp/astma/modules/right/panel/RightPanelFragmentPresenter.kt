@@ -17,7 +17,7 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
     @Inject lateinit var quotesRepository: QuotesRepository
 
     private var rightPanelUseCase: RightPanelUseCase? = null
-    private var commonPreferencesHelper : CommonPreferencesHelper? =  null
+    private var commonPreferencesHelper: CommonPreferencesHelper? = null
 
     private val dateChangeListener = object : MainActivity.DateChangeListener {
         override fun onDateChanged(day: Int, month: Int, year: Int) {
@@ -34,8 +34,8 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
         quotesManager.addQuote(it)
     }
 
-    private val onFailure: (throwable: Throwable?) -> Unit = {
-        view?.showNetworkError()
+    private val onError: (error: String?) -> Unit = { it ->
+        view?.showError(it)
     }
 
     override fun onCreate(savedState: Bundle?) {
@@ -61,8 +61,8 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
     }
 
     private fun addQuote(value: Int, date: Date, isMorning: Boolean) {
-        commonPreferencesHelper?.let {
-            rightPanelUseCase?.addQuote(QuoteRequest(value, date, isMorning, it.userToken), onResult, onFailure)
+        commonPreferencesHelper?.userToken?.let { token ->
+            rightPanelUseCase?.addQuote(QuoteRequest(value, date, isMorning, token), onResult, onError)
         }
     }
 

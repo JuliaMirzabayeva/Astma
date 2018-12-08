@@ -8,15 +8,19 @@ import com.example.jjp.astma.models.quotes.QuotesRepository
 class RightPanelUseCase(private val quotesRepository: QuotesRepository) {
     fun addQuote(addQuoteRequest: QuoteRequest,
                  onResult: (quote: Quote) -> Unit,
-                 onFailure: ((Throwable?) -> Unit)? = null) {
+                 onError: (error : String?) -> Unit) {
 
         quotesRepository.addQuote(addQuoteRequest, object : ModelLoadingListener<Quote> {
             override fun onModelLoaded(model: Quote) {
                 onResult(model)
             }
 
+            override fun onModelError(error: String?) {
+                onError(error)
+            }
+
             override fun onModelFailure(error: Throwable?) {
-                onFailure?.invoke(error)
+                onError(null)
             }
         })
     }

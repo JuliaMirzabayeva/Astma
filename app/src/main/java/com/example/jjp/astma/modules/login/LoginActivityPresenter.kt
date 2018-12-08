@@ -19,8 +19,8 @@ class LoginActivityPresenter : Presenter<LoginActivity>() {
         view?.goToChartActivity()
     }
 
-    private val onFailure: (throwable: Throwable?) -> Unit = {
-
+    private val onError: (error: String?) -> Unit = { it ->
+        view?.showError(it)
     }
 
     override fun onCreate(savedState: Bundle?) {
@@ -35,6 +35,6 @@ class LoginActivityPresenter : Presenter<LoginActivity>() {
     }
 
     fun signInUser(email: String, password: String) {
-        loginUseCase?.signInUser(SignInRequest(email, password), onResult, onFailure)
+        loginUseCase?.signInUser(SignInRequest(email, password), onResult, onError)
     }
 }
