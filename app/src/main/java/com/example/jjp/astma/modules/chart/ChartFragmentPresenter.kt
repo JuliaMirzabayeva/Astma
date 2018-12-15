@@ -11,10 +11,8 @@ import nucleus.presenter.Presenter
 import javax.inject.Inject
 
 class ChartFragmentPresenter : Presenter<ChartFragment>() {
-    @Inject
-    lateinit var quotesManager: QuotesManager
-    @Inject
-    lateinit var quotesRepository: QuotesRepository
+    @Inject lateinit var quotesManager: QuotesManager
+    @Inject lateinit var quotesRepository: QuotesRepository
 
     private var chartUseCase: ChartUseCase? = null
     private var commonPreferencesHelper: CommonPreferencesHelper? = null

@@ -47,10 +47,10 @@ class QuotesRepository
     }
 
     fun formatQuote(quoteResponse: QuoteResponse): Quote {
-        val calendar = Calendar.getInstance()
+        val calendar = GregorianCalendar.getInstance()
         calendar.time = quoteResponse.date
         val quoteDate = QuoteDate(calendar.get(Calendar.DAY_OF_MONTH),
-                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.MONTH) + 1,
                 calendar.get(Calendar.YEAR))
         return Quote(quoteResponse.value, quoteDate, quoteResponse.isMorning)
     }

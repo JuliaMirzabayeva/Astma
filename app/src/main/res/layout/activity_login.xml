@@ -64,8 +64,8 @@
             android:layout_marginTop="20dp"
             android:text="@string/sign_in"
             android:foreground="?android:attr/selectableItemBackground"
-            android:background="@drawable/button_stoke_accent_background"
-            android:textColor="@color/colorAccent" />
+            android:background="@drawable/ic_button_accent_background"
+            android:textColor="@color/colorPrimary" />
 
         <Button
             android:id="@+id/signUpButton"

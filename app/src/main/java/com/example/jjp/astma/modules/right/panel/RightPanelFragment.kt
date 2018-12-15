@@ -27,21 +27,21 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
         setDefaultDate()
         setTimeSelected(true)
 
-        morningButton.setOnClickListener { _ ->
+        morningButton.setOnClickListener {
             setTimeSelected(true)
         }
-        eveningButton.setOnClickListener { _ ->
+        eveningButton.setOnClickListener {
             setTimeSelected(false)
         }
 
-        dateLabel.setOnClickListener { _ ->
+        dateLabel.setOnClickListener {
             val calendar = getCalendar()
             (activity as MainActivity).showDatePicker(calendar.get(Calendar.DAY_OF_MONTH),
                     calendar.get(Calendar.MONTH),
                     calendar.get(Calendar.YEAR))
         }
 
-        addQuoteButton.setOnClickListener { _ ->
+        addQuoteButton.setOnClickListener {
             val value = valueLabel.text.toString().toIntOrNull()
             if (value != null) {
                 val calendar = getCalendar()
@@ -56,7 +56,7 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
     }
 
     private fun getCalendar(): Calendar {
-        val calendar = Calendar.getInstance()
+        val calendar = GregorianCalendar.getInstance()
         calendar.time = getSimpleDayFormat().parse(dateLabel.text.toString())
         return calendar
     }
