@@ -1,10 +1,10 @@
 package com.example.jjp.astma.modules.chart
 
 import android.os.Bundle
-import com.example.jjp.astma.api.request.QuotesRequest
 import com.example.jjp.astma.dagger.App
 import com.example.jjp.astma.data.Quote
 import com.example.jjp.astma.models.QuotesManager
+import com.example.jjp.astma.models.quotes.QuoteConverter
 import com.example.jjp.astma.models.quotes.QuotesRepository
 import com.example.jjp.astma.preferences.CommonPreferencesHelper
 import nucleus.presenter.Presenter
@@ -17,13 +17,16 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
     private var chartUseCase: ChartUseCase? = null
     private var commonPreferencesHelper: CommonPreferencesHelper? = null
 
+    private val quotesConverter = QuoteConverter()
+
     private val quotesListener = object : QuotesManager.QuoteListener {
         override fun onQuoteAdded(quote: Quote) {
             view?.addQuote(quote)
         }
 
-        override fun onQuotesRangeChanged(month: Int, maxRange: Int) {
+        override fun onQuotesRangeChanged(month: Int, year: Int, maxRange: Int) {
             view?.setXRange(maxRange)
+            loadQuotes(month, year, maxRange)
         }
     }
 
@@ -46,12 +49,12 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
         view.initChart()
         quotesManager.addQuoteListener(quotesListener)
         commonPreferencesHelper = CommonPreferencesHelper(view.activity.baseContext)
-        loadQuotes()
     }
 
-    private fun loadQuotes() {
+    private fun loadQuotes(month : Int, year : Int, maxRange: Int) {
         commonPreferencesHelper?.userToken?.let { token ->
-            chartUseCase?.loadQuotes(QuotesRequest(token = token), onResult, onError)
+            val quotesRequest = quotesConverter.convertDataToQuotesRequest(month, year, maxRange, token)
+            chartUseCase?.loadQuotes(quotesRequest, onResult, onError)
         }
     }
 

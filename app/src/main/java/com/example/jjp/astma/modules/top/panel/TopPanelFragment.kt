@@ -44,7 +44,7 @@ class TopPanelFragment : NucleusFragment<TopPanelFragmentPresenter>() {
 
     fun changeQuotesRange(year: Int, month: Int) {
         val daysInMonth = presenter.getCalendar(year, month).getActualMaximum(Calendar.DAY_OF_MONTH)
-        presenter?.changeQuotesRange(month, daysInMonth)
+        presenter?.changeQuotesRange(month, year, daysInMonth)
     }
 
     fun setPickerText(year: Int, month: Int) {
