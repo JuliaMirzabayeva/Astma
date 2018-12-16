@@ -25,40 +25,38 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
     }
 
     fun initChart(quotes: List<Quote>) {
-        if (quotes.isNotEmpty()) {
-            val entries = ArrayList<Entry>()
+        val entries = ArrayList<Entry>()
 
-            quotes.forEach { quote ->
-                entries.add(Entry(quote.date.day.toFloat(), quote.value.toFloat()))
-            }
-
-            val dataSet = LineDataSet(entries, "")
-
-            dataSet.color = ContextCompat.getColor(activity.baseContext, R.color.colorChartLine)
-            dataSet.valueTextColor = ContextCompat.getColor(activity.baseContext, R.color.colorLightGrey)
-
-            dataSet.setDrawValues(false)
-
-            val xAxis = chart.xAxis
-
-            xAxis.position = XAxis.XAxisPosition.BOTTOM
-            xAxis.granularity = 1f
-            xAxis.textColor = ContextCompat.getColor(activity.baseContext, R.color.colorLightGrey)
-
-            val yAxisRight = chart.axisRight
-            yAxisRight.isEnabled = false
-
-            val yAxisLeft = chart.axisLeft
-            yAxisLeft.granularity = 1f
-
-            yAxisLeft.textColor = xAxis.textColor
-
-            val data = LineData(dataSet)
-            chart.data = data
-            chart.animateX(2500)
-
-            chart.invalidate()
+        quotes.forEach { quote ->
+            entries.add(Entry(quote.date.day.toFloat(), quote.value.toFloat()))
         }
+
+        val dataSet = LineDataSet(entries, "")
+
+        dataSet.color = ContextCompat.getColor(activity.baseContext, R.color.colorChartLine)
+        dataSet.valueTextColor = ContextCompat.getColor(activity.baseContext, R.color.colorLightGrey)
+
+        dataSet.setDrawValues(false)
+
+        val xAxis = chart.xAxis
+
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.granularity = 1f
+        xAxis.textColor = ContextCompat.getColor(activity.baseContext, R.color.colorLightGrey)
+
+        val yAxisRight = chart.axisRight
+        yAxisRight.isEnabled = false
+
+        val yAxisLeft = chart.axisLeft
+        yAxisLeft.granularity = 1f
+
+        yAxisLeft.textColor = xAxis.textColor
+
+        val data = LineData(dataSet)
+        chart.data = data
+        chart.animateX(2500)
+
+        chart.invalidate()
     }
 
     fun addQuote(quote: Quote) {

@@ -1,8 +1,12 @@
 package com.example.jjp.astma.dagger;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.example.jjp.astma.api.ApiService;
+import com.example.jjp.astma.preferences.CommonPreferencesHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -48,5 +52,21 @@ class AppModule {
                 .build();
 
         return retrofit.create(ApiService.class);
+    }
+
+    @Provides
+    Context provideContext() {
+        return app;
+    }
+
+    @Provides
+    SharedPreferences providePreferences(Context context){
+        return PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    @Provides
+    @Singleton
+    CommonPreferencesHelper provideCommonPreferencesHelper(SharedPreferences preferences){
+        return new CommonPreferencesHelper(preferences);
     }
 }

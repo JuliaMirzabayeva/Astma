@@ -15,9 +15,9 @@ import javax.inject.Inject
 class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
     @Inject lateinit var quotesManager: QuotesManager
     @Inject lateinit var quotesRepository: QuotesRepository
+    @Inject lateinit var commonPreferencesHelper: CommonPreferencesHelper
 
     private var rightPanelUseCase: RightPanelUseCase? = null
-    private var commonPreferencesHelper: CommonPreferencesHelper? = null
 
     private val quoteConverter : QuoteConverter = QuoteConverter()
 
@@ -49,7 +49,6 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
     override fun onTakeView(view: RightPanelFragment?) {
         super.onTakeView(view)
         (view?.activity as MainActivity).addDateListener(dateChangeListener)
-        commonPreferencesHelper = CommonPreferencesHelper(view.activity.baseContext)
     }
 
     override fun dropView() {
@@ -58,7 +57,7 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
     }
 
     fun addQuote(quote: Quote) {
-        commonPreferencesHelper?.userToken?.let { token ->
+        commonPreferencesHelper.userToken?.let { token ->
             val quoteRequest = quoteConverter.convertQuoteToQuoteRequest(quote, token)
             rightPanelUseCase?.addQuote(quoteRequest, onResult, onError)
         }

@@ -4,12 +4,14 @@ import android.os.Bundle
 import com.example.jjp.astma.dagger.App
 import com.example.jjp.astma.models.QuotesManager
 import com.example.jjp.astma.modules.main.MainActivity
+import com.example.jjp.astma.preferences.CommonPreferencesHelper
 import nucleus.presenter.Presenter
 import java.util.*
 import javax.inject.Inject
 
 class TopPanelFragmentPresenter : Presenter<TopPanelFragment>() {
     @Inject lateinit var quotesManager: QuotesManager
+    @Inject lateinit var commonPreferencesHelper: CommonPreferencesHelper
 
     private val dateChangeListener = object : MainActivity.DateChangeListener {
         override fun onDateChanged(day: Int, month: Int, year: Int) {}
@@ -37,7 +39,9 @@ class TopPanelFragmentPresenter : Presenter<TopPanelFragment>() {
         super.dropView()
     }
 
-    fun changeQuotesRange(month: Int, year : Int, maxRange: Int) {
+    fun changeQuotesRange(month: Int, year: Int, maxRange: Int) {
+        commonPreferencesHelper.chartMonth = month + 1
+        commonPreferencesHelper.chartYear = year
         quotesManager.changeQuotesRange(month, year, maxRange)
     }
 

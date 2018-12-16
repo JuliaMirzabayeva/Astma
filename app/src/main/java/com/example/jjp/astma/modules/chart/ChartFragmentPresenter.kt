@@ -13,15 +13,15 @@ import javax.inject.Inject
 class ChartFragmentPresenter : Presenter<ChartFragment>() {
     @Inject lateinit var quotesManager: QuotesManager
     @Inject lateinit var quotesRepository: QuotesRepository
+    @Inject lateinit var commonPreferencesHelper: CommonPreferencesHelper
 
     private var chartUseCase: ChartUseCase? = null
-    private var commonPreferencesHelper: CommonPreferencesHelper? = null
 
     private val quotesConverter = QuoteConverter()
 
     private val quotesListener = object : QuotesManager.QuoteListener {
         override fun onQuoteAdded(quote: Quote) {
-            view?.addQuote(quote)
+            if (isForChart(quote)) view?.addQuote(quote)
         }
 
         override fun onQuotesRangeChanged(month: Int, year: Int, maxRange: Int) {
@@ -30,8 +30,8 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
         }
     }
 
-    private val onResult: (quotes: List<Quote>) -> Unit = {
-        view?.initChart(it)
+    private val onResult: (quotes: List<Quote>) -> Unit = { list ->
+        if (list.isNotEmpty() && isForChart(list[0])) view?.initChart(list)
     }
 
     private val onError: (error: String?) -> Unit = { it ->
@@ -47,11 +47,10 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
     override fun onTakeView(view: ChartFragment) {
         super.onTakeView(view)
         quotesManager.addQuoteListener(quotesListener)
-        commonPreferencesHelper = CommonPreferencesHelper(view.activity.baseContext)
     }
 
-    private fun loadQuotes(month : Int, year : Int, maxRange: Int) {
-        commonPreferencesHelper?.userToken?.let { token ->
+    private fun loadQuotes(month: Int, year: Int, maxRange: Int) {
+        commonPreferencesHelper.userToken?.let { token ->
             val quotesRequest = quotesConverter.convertDataToQuotesRequest(month, year, maxRange, token)
             chartUseCase?.loadQuotes(quotesRequest, onResult, onError)
         }
@@ -60,5 +59,10 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
     override fun dropView() {
         quotesManager.removeQuoteListener(quotesListener)
         super.dropView()
+    }
+
+    private fun isForChart(quote: Quote): Boolean {
+        return quote.date.month == commonPreferencesHelper.chartMonth
+                && quote.date.year == commonPreferencesHelper.chartYear
     }
 }

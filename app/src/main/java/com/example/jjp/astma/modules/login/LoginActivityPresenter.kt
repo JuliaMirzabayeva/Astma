@@ -10,12 +10,12 @@ import javax.inject.Inject
 
 class LoginActivityPresenter : Presenter<LoginActivity>() {
     @Inject lateinit var loginRepository: LoginRepository
+    @Inject lateinit var commonPreferencesHelper: CommonPreferencesHelper
 
     private var loginUseCase: LoginUseCase? = null
-    private var commonPreferencesHelper : CommonPreferencesHelper? = null
 
     private val onResult: (token : String) -> Unit = {
-        commonPreferencesHelper?.userToken = it
+        commonPreferencesHelper.userToken = it
         view?.goToChartActivity()
     }
 
@@ -27,11 +27,6 @@ class LoginActivityPresenter : Presenter<LoginActivity>() {
         super.onCreate(savedState)
         App.component().inject(this)
         loginUseCase = LoginUseCase(loginRepository)
-    }
-
-    override fun onTakeView(view: LoginActivity?) {
-        super.onTakeView(view)
-        commonPreferencesHelper = CommonPreferencesHelper(view!!.baseContext)
     }
 
     fun signInUser(email: String, password: String) {
