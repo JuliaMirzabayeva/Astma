@@ -16,22 +16,10 @@ class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // signUpButton.setOnClickListener { if (validateLoginFields())  }
-
         signInButton.setOnClickListener {
             presenter.signInUser(email.text.toString(), password.text.toString())
         }
     }
-
-//    private fun validateLoginFields(): Boolean {
-//        emailLayout.error = if (email.text.isEmpty()) getString(R.string.error_field_required) else null
-//        passwordLayout.error = when {
-//            password.text.isEmpty() -> getString(R.string.error_field_required)
-//            password.text.length != DEVICE_CODE_LENGTH -> getString(R.string.error_invalid_device_code)
-//            else -> null
-//        }
-//        return emailLayout.error == null && password.error == null
-//    }
 
     fun goToChartActivity() {
         val intent = Intent(this.baseContext, MainActivity::class.java)
@@ -45,10 +33,6 @@ class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
                 error ?: getString(R.string.network_error),
                 Snackbar.LENGTH_SHORT
         ).show()
-    }
-
-    companion object {
-        //const val DEVICE_CODE_LENGTH = 10
     }
 }
 

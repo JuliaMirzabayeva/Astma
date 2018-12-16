@@ -24,9 +24,14 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         return inflater?.inflate(R.layout.fragment_chart, container, false)
     }
 
-    fun initChart() {
+    fun initChart(quotes: List<Quote>?= null) {
         val entries = ArrayList<Entry>()
-        entries.add(Entry(1F, 1F))
+       // entries.add(Entry(1F, 300F))
+
+        quotes?.forEach { quote ->
+            entries.add(Entry(quote.date.day.toFloat(), quote.value.toFloat()))} ?:
+        entries.add(Entry(1F, 300F))
+
 
         val dataSet = LineDataSet(entries, "")
 
@@ -63,6 +68,7 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
     }
 
     fun setXRange(maxX: Int) {
+        chart.data.clearValues()
         chart.xAxis.axisMinimum = 1F
         chart.xAxis.axisMaximum = maxX.toFloat()
         chart.invalidate()

@@ -37,8 +37,8 @@ class TopPanelFragmentPresenter : Presenter<TopPanelFragment>() {
         super.dropView()
     }
 
-    fun changeQuotesRange(maxRange: Int) {
-        quotesManager.changeQuotesRange(maxRange)
+    fun changeQuotesRange(month: Int, maxRange: Int) {
+        quotesManager.changeQuotesRange(month, maxRange)
     }
 
     fun getCalendar(year: Int, month: Int): Calendar {

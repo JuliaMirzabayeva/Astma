@@ -1,10 +1,10 @@
 package com.example.jjp.astma.modules.right.panel
 
 import android.os.Bundle
-import com.example.jjp.astma.api.request.QuoteRequest
 import com.example.jjp.astma.dagger.App
 import com.example.jjp.astma.data.Quote
 import com.example.jjp.astma.models.QuotesManager
+import com.example.jjp.astma.models.quotes.QuoteConverter
 import com.example.jjp.astma.models.quotes.QuotesRepository
 import com.example.jjp.astma.modules.main.MainActivity
 import com.example.jjp.astma.preferences.CommonPreferencesHelper
@@ -18,6 +18,8 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
 
     private var rightPanelUseCase: RightPanelUseCase? = null
     private var commonPreferencesHelper: CommonPreferencesHelper? = null
+
+    private val quoteConverter : QuoteConverter = QuoteConverter()
 
     private val dateChangeListener = object : MainActivity.DateChangeListener {
         override fun onDateChanged(day: Int, month: Int, year: Int) {
@@ -56,13 +58,9 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
     }
 
     fun addQuote(quote: Quote) {
-        val quoteDate = getCalendar(quote.date.day, quote.date.month, quote.date.year).time
-        addQuote(quote.value, quoteDate, quote.isMorning)
-    }
-
-    private fun addQuote(value: Int, date: Date, isMorning: Boolean) {
         commonPreferencesHelper?.userToken?.let { token ->
-            rightPanelUseCase?.addQuote(QuoteRequest(value, date, isMorning, token), onResult, onError)
+            val quoteRequest = quoteConverter.convertQuoteToQuoteRequest(quote, token)
+            rightPanelUseCase?.addQuote(quoteRequest, onResult, onError)
         }
     }
 

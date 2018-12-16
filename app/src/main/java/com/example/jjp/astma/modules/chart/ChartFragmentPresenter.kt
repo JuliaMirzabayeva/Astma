@@ -22,12 +22,13 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
             view?.addQuote(quote)
         }
 
-        override fun onQuotesRangeChanged(maxRange: Int) {
+        override fun onQuotesRangeChanged(month: Int, maxRange: Int) {
             view?.setXRange(maxRange)
         }
     }
 
     private val onResult: (quotes: List<Quote>) -> Unit = {
+        view?.initChart(it)
     }
 
     private val onError: (error: String?) -> Unit = { it ->
