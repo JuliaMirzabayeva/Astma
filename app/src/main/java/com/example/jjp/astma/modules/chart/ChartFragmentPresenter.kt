@@ -46,7 +46,6 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
 
     override fun onTakeView(view: ChartFragment) {
         super.onTakeView(view)
-        view.initChart()
         quotesManager.addQuoteListener(quotesListener)
         commonPreferencesHelper = CommonPreferencesHelper(view.activity.baseContext)
     }
