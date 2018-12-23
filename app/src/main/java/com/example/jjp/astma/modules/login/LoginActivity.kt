@@ -3,6 +3,7 @@ package com.example.jjp.astma.modules.login
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.view.View
 import com.example.jjp.astma.R
 import com.example.jjp.astma.modules.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
@@ -17,6 +18,7 @@ class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
         setContentView(R.layout.activity_login)
 
         signInButton.setOnClickListener {
+            progress.visibility = View.VISIBLE
             presenter.signInUser(email.text.toString(), password.text.toString())
         }
     }
@@ -33,6 +35,10 @@ class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
                 error ?: getString(R.string.network_error),
                 Snackbar.LENGTH_SHORT
         ).show()
+    }
+
+    fun hideProgress(){
+        progress.visibility = View.GONE
     }
 }
 

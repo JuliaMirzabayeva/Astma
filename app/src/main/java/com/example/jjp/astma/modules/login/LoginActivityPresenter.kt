@@ -16,10 +16,12 @@ class LoginActivityPresenter : Presenter<LoginActivity>() {
 
     private val onResult: (token : String) -> Unit = {
         commonPreferencesHelper.userToken = it
+        view?.hideProgress()
         view?.goToChartActivity()
     }
 
     private val onError: (error: String?) -> Unit = { it ->
+        view?.hideProgress()
         view?.showError(it)
     }
 
