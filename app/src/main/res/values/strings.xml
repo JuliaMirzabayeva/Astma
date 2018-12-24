@@ -14,4 +14,8 @@
     <string name="exhale">Выдох</string>
     <string name="exhale_error">Введите значение выдоха</string>
     <string name="network_error">Произошла ошибка. Проверьте Интернет соединение</string>
+    <string name="quote_exist">Выдох на выбранную дату уже существует</string>
+    <string name="do_you_want_to_edit_quote">Хотите заменить?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>

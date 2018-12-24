@@ -1,6 +1,7 @@
 package com.example.jjp.astma.models.quotes
 
 import com.example.jjp.astma.api.ApiService
+import com.example.jjp.astma.api.request.EditQuoteRequest
 import com.example.jjp.astma.api.request.QuoteRequest
 import com.example.jjp.astma.api.request.QuotesRequest
 import com.example.jjp.astma.api.response.QuoteResponse
@@ -14,14 +15,18 @@ import javax.inject.Singleton
 class QuotesLoader
 @Inject constructor(private val api: ApiService) {
     fun loadQuotes(request: QuotesRequest, callback: Callback<List<QuoteResponse>>){
-        api.loadQuotes(request).enqueue(LoadQuoteApiCallback(callback))
+        api.loadQuotes(request).enqueue(QuotesApiCallback(callback))
     }
 
     fun addQuote(request: QuoteRequest, callback: Callback<QuoteResponse>) {
-        api.addQuote(request).enqueue(AddQuoteApiCallback(callback))
+        api.addQuote(request).enqueue(QuoteApiCallback(callback))
     }
 
-    private inner class LoadQuoteApiCallback internal constructor(val callback: Callback<List<QuoteResponse>>) : Callback<List<QuoteResponse>> {
+    fun editQuote(request: EditQuoteRequest, callback: Callback<QuoteResponse>) {
+        api.editQuote(request).enqueue(QuoteApiCallback(callback))
+    }
+
+    private inner class QuotesApiCallback internal constructor(val callback: Callback<List<QuoteResponse>>) : Callback<List<QuoteResponse>> {
         override fun onFailure(call: Call<List<QuoteResponse>>, t: Throwable) {
             callback.onFailure(call, t)
         }
@@ -31,7 +36,7 @@ class QuotesLoader
         }
     }
 
-    private inner class AddQuoteApiCallback internal constructor(val callback: Callback<QuoteResponse>) : Callback<QuoteResponse> {
+    private inner class QuoteApiCallback internal constructor(val callback: Callback<QuoteResponse>) : Callback<QuoteResponse> {
         override fun onFailure(call: Call<QuoteResponse>, t: Throwable) {
             callback.onFailure(call, t)
         }

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.jjp.astma.R
 import com.example.jjp.astma.data.Quote
-import com.example.jjp.astma.data.QuoteDate
 import com.example.jjp.astma.modules.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_right_panel.*
 import nucleus.factory.RequiresPresenter
@@ -44,11 +43,12 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
         addQuoteButton.setOnClickListener {
             val value = valueLabel.text.toString().toIntOrNull()
             if (value != null) {
-                val calendar = getCalendar()
-                val date = QuoteDate(calendar.get(Calendar.DAY_OF_MONTH),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.YEAR))
-                presenter?.addQuote(Quote(value, date, morningButton.isSelected))
+                presenter?.let {presenter ->
+                    presenter.addQuote(Quote(-1,
+                            value,
+                            getCalendar().time,
+                            morningButton.isSelected))
+                }
             } else {
                 (activity as MainActivity).showError(activity.baseContext.getString(R.string.exhale_error))
             }
@@ -80,5 +80,11 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
 
     fun showError(error: String? = null) {
         (activity as MainActivity).showError(error ?: getString(R.string.network_error))
+    }
+
+    fun showEditQuoteAlertDialog(onPositive: () -> Unit) {
+        (activity as MainActivity).showAlertDialog(getString(R.string.quote_exist),
+                getString(R.string.do_you_want_to_edit_quote),
+                onPositive)
     }
 }

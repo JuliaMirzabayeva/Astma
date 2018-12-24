@@ -1,5 +1,6 @@
 package com.example.jjp.astma.api
 
+import com.example.jjp.astma.api.request.EditQuoteRequest
 import com.example.jjp.astma.api.request.QuoteRequest
 import com.example.jjp.astma.api.request.QuotesRequest
 import com.example.jjp.astma.api.request.SignInRequest
@@ -15,6 +16,9 @@ interface ApiService {
 
     @POST("api/chart/add")
     fun addQuote(@Body request: QuoteRequest): Call<QuoteResponse>
+
+    @POST("api/chart/edit")
+    fun editQuote(@Body request: EditQuoteRequest): Call<QuoteResponse>
 
     @POST("api/chart")
     fun loadQuotes(@Body request : QuotesRequest): Call<List<QuoteResponse>>

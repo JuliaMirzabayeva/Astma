@@ -1,5 +1,6 @@
 package com.example.jjp.astma.modules.main
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -85,5 +86,21 @@ class MainActivity : AppCompatActivity() {
                 error,
                 Snackbar.LENGTH_SHORT
         ).show()
+    }
+
+    fun showAlertDialog(title : String,
+                        message : String,
+                        onPositive: () -> Unit){
+        val baseContext = this
+        val builder  = AlertDialog.Builder(baseContext)
+        builder.setTitle(title)
+        builder.setMessage(message)
+        builder.setPositiveButton(getString(R.string.yes)) { _, _ ->
+            onPositive()
+        }
+        builder.setNegativeButton(getString(R.string.no)) { _, _ ->
+
+        }
+        builder.show()
     }
 }

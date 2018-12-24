@@ -1,5 +1,6 @@
 package com.example.jjp.astma.models.quotes
 
+import com.example.jjp.astma.api.request.EditQuoteRequest
 import com.example.jjp.astma.api.request.QuoteRequest
 import com.example.jjp.astma.api.request.QuotesRequest
 import com.example.jjp.astma.api.response.QuoteResponse
@@ -34,6 +35,22 @@ class QuotesRepository
 
     fun addQuote(addQuoteRequest: QuoteRequest, modelLoadingListener: ModelLoadingListener<Quote>) {
         quotesLoader.addQuote(addQuoteRequest, object : Callback<QuoteResponse> {
+            override fun onResponse(call: Call<QuoteResponse>, response: Response<QuoteResponse>) {
+                response.body()?.let {
+                    val quote = quoteConverter.convertQuoteResponseToQuote(it)
+                    modelLoadingListener.onModelLoaded(quote)
+                } ?: modelLoadingListener.onModelError(getError(response))
+
+            }
+
+            override fun onFailure(call: Call<QuoteResponse>, t: Throwable?) {
+                modelLoadingListener.onModelFailure(t)
+            }
+        })
+    }
+
+    fun editQuote(editQuoteRequest: EditQuoteRequest, modelLoadingListener: ModelLoadingListener<Quote>) {
+        quotesLoader.editQuote(editQuoteRequest, object : Callback<QuoteResponse> {
             override fun onResponse(call: Call<QuoteResponse>, response: Response<QuoteResponse>) {
                 response.body()?.let {
                     val quote = quoteConverter.convertQuoteResponseToQuote(it)

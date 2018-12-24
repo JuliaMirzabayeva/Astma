@@ -28,7 +28,7 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         val entries = ArrayList<Entry>()
 
         quotes.forEach { quote ->
-            entries.add(Entry(quote.date.day.toFloat(), quote.value.toFloat()))
+            entries.add(Entry(presenter.getDay(quote).toFloat(), quote.value.toFloat()))
         }
 
         val dataSet = LineDataSet(entries, "")
@@ -63,7 +63,7 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         if (chart.data.dataSets.isEmpty()) {
             initChart(listOf(quote))
         } else {
-            chart.data.addEntry(Entry(quote.date.day.toFloat(), quote.value.toFloat()), 0)
+            chart.data.addEntry(Entry(presenter.getDay(quote).toFloat(), quote.value.toFloat()), 0)
         }
         chart.notifyDataSetChanged()
         chart.invalidate()

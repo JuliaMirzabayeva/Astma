@@ -1,3 +1,5 @@
 package com.example.jjp.astma.data
 
-class Quote(var value: Int, var date: QuoteDate, var isMorning: Boolean)
+import java.util.Date
+
+class Quote(var id : Int, var value: Int, var date: Date, var isMorning: Boolean)

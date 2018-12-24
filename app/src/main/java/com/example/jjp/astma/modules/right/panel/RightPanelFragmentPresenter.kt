@@ -1,6 +1,7 @@
 package com.example.jjp.astma.modules.right.panel
 
 import android.os.Bundle
+import com.example.jjp.astma.api.request.EditQuoteRequest
 import com.example.jjp.astma.dagger.App
 import com.example.jjp.astma.data.Quote
 import com.example.jjp.astma.models.QuotesManager
@@ -19,7 +20,9 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
 
     private var rightPanelUseCase: RightPanelUseCase? = null
 
-    private val quoteConverter : QuoteConverter = QuoteConverter()
+    private val quoteConverter: QuoteConverter = QuoteConverter()
+
+    private var editQuote: Quote? = null
 
     private val dateChangeListener = object : MainActivity.DateChangeListener {
         override fun onDateChanged(day: Int, month: Int, year: Int) {
@@ -32,8 +35,12 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
         }
     }
 
-    private val onResult: (quote: Quote) -> Unit = {
+    private val onAddResult: (quote: Quote) -> Unit = {
         quotesManager.addQuote(it)
+    }
+
+    private val onEditResult: (quote: Quote) -> Unit = {
+        editQuote = null
     }
 
     private val onError: (error: String?) -> Unit = { it ->
@@ -57,9 +64,31 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
     }
 
     fun addQuote(quote: Quote) {
-        commonPreferencesHelper.userToken?.let { token ->
-            val quoteRequest = quoteConverter.convertQuoteToQuoteRequest(quote, token)
-            rightPanelUseCase?.addQuote(quoteRequest, onResult, onError)
+        if (quotesManager.isNewQuote(quote)) {
+            commonPreferencesHelper.userToken?.let { token ->
+                val quoteRequest = quoteConverter.convertQuoteToQuoteRequest(quote, token)
+                rightPanelUseCase?.addQuote(quoteRequest, onAddResult, onError)
+            }
+        } else {
+            editQuote = Quote(quotesManager.getQuoteIdByDate(quote)!!,
+                    quote.value,
+                    quote.date,
+                    quote.isMorning)
+            showEditQuoteDialog()
+        }
+    }
+
+    private fun showEditQuoteDialog() {
+        view?.showEditQuoteAlertDialog(::editQuote)
+    }
+
+    private fun editQuote() {
+        editQuote?.let { quote ->
+            commonPreferencesHelper.userToken?.let { token ->
+                rightPanelUseCase?.editQuote(EditQuoteRequest(quote.id, quote.value, token),
+                        onEditResult,
+                        onError)
+            }
         }
     }
 

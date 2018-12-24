@@ -31,6 +31,7 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
     }
 
     private val onResult: (quotes: List<Quote>) -> Unit = { list ->
+        quotesManager.setQuotes(list)
         if (list.isNotEmpty() && isForChart(list[0])) view?.initChart(list)
     }
 
@@ -62,7 +63,19 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
     }
 
     private fun isForChart(quote: Quote): Boolean {
-        return quote.date.month == commonPreferencesHelper.chartMonth
-                && quote.date.year == commonPreferencesHelper.chartYear
+        return getMonth(quote) == commonPreferencesHelper.chartMonth
+                && getYear(quote) == commonPreferencesHelper.chartYear
+    }
+
+    fun getDay(quote: Quote) : Int{
+        return quotesManager.getDay(quote)
+    }
+
+    private fun getMonth(quote: Quote) : Int{
+        return quotesManager.getMonth(quote)
+    }
+
+    private fun getYear(quote: Quote) : Int{
+        return quotesManager.getYear(quote)
     }
 }
