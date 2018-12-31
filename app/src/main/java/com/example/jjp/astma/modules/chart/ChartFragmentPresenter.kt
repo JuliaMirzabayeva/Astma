@@ -24,6 +24,16 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
             if (isForChart(quote)) view?.addQuote(quote)
         }
 
+        override fun onQuoteEdited(quote: Quote) {
+            if ((isForChart(quote))) {
+                val quotes = quotesManager.quotes[Pair(getYear(quote), getMonth(quote))]
+                quotes?.let {
+                    view?.clearChart()
+                    view?.initChart(it)
+                }
+            }
+        }
+
         override fun onQuotesRangeChanged(month: Int, year: Int, maxRange: Int) {
             view?.setXRange(maxRange)
             loadQuotes(month, year, maxRange)

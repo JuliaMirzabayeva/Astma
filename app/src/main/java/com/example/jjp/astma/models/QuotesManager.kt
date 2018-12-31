@@ -3,13 +3,15 @@ package com.example.jjp.astma.models
 import android.text.format.DateFormat
 import com.example.jjp.astma.data.Quote
 import java.util.*
+import kotlin.collections.HashMap
 
 class QuotesManager {
-    var quotes = ArrayList<Quote>()
+    var quotes = HashMap<Pair<Int, Int>, MutableList<Quote>>() // Pair<Int, Int> = Pair<year, month>
     private var quoteListeners = HashSet<QuoteListener>()
 
     interface QuoteListener {
         fun onQuoteAdded(quote: Quote)
+        fun onQuoteEdited(quote: Quote)
         fun onQuotesRangeChanged(month: Int, year: Int, maxRange: Int)
     }
 
@@ -22,8 +24,22 @@ class QuotesManager {
     }
 
     fun addQuote(quote: Quote) {
-        quotes.add(quote)
+        val date = Pair(getYear(quote), getMonth(quote))
+        if (quotes[date] != null) {
+            quotes[date]?.add(quote)
+            quotes[date]?.sortBy { it.date }
+        } else {
+            quotes[date] = mutableListOf(quote)
+        }
         quoteListeners.forEach { it.onQuoteAdded(quote) }
+    }
+
+    fun editQuote(quote: Quote) {
+        val date = Pair(getYear(quote), getMonth(quote))
+        quotes[date]?.let { list ->
+            list.find { it.id == quote.id }?.value = quote.value
+            quoteListeners.forEach { it.onQuoteEdited(quote) }
+        }
     }
 
     fun changeQuotesRange(month: Int, year: Int, maxRange: Int) {
@@ -31,18 +47,23 @@ class QuotesManager {
     }
 
     fun setQuotes(list: List<Quote>) {
-        quotes.clear()
-        quotes.addAll(list)
+        val quote = list[0]
+        val date = Pair(getYear(quote), getMonth(quote))
+        quotes[date] = list.toMutableList()
     }
 
     fun getQuoteIdByDate(quote: Quote): Int? {
-        return quotes.find { it -> isSameDate(it, quote) }?.id
+        val date = Pair(getYear(quote), getMonth(quote))
+        return quotes[date]?.let { list -> list.find { isSameDate(it, quote) } }?.id
     }
 
     fun isNewQuote(quote: Quote): Boolean {
-        quotes.forEach {
-            if (isSameDate(it, quote)) {
-                return false
+        val date = Pair(getYear(quote), getMonth(quote))
+        quotes[date]?.let { list ->
+            list.forEach {
+                if (isSameDate(it, quote)) {
+                    return false
+                }
             }
         }
         return true

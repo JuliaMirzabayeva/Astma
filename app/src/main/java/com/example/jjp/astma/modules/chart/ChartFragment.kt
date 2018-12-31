@@ -69,6 +69,11 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         chart.invalidate()
     }
 
+    fun clearChart() {
+        chart.data?.clearValues()
+        chart.invalidate()
+    }
+
     fun setXRange(maxX: Int) {
         chart.data?.clearValues()
         chart.xAxis.axisMinimum = 1F

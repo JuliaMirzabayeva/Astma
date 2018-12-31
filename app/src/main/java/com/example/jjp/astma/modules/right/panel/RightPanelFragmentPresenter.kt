@@ -41,6 +41,7 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
 
     private val onEditResult: (quote: Quote) -> Unit = {
         editQuote = null
+        quotesManager.editQuote(it)
     }
 
     private val onError: (error: String?) -> Unit = { it ->
