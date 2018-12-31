@@ -47,9 +47,11 @@ class QuotesManager {
     }
 
     fun setQuotes(list: List<Quote>) {
-        val quote = list[0]
-        val date = Pair(getYear(quote), getMonth(quote))
-        quotes[date] = list.toMutableList()
+        if (list.isNotEmpty()) {
+            val quote = list[0]
+            val date = Pair(getYear(quote), getMonth(quote))
+            quotes[date] = list.toMutableList()
+        }
     }
 
     fun getQuoteIdByDate(quote: Quote): Int? {
