@@ -6,29 +6,28 @@ import android.support.design.widget.Snackbar
 import android.view.View
 import com.example.jjp.astma.R
 import com.example.jjp.astma.modules.main.MainActivity
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_registration.*
 import nucleus.factory.RequiresPresenter
 import nucleus.view.NucleusActivity
 
-@RequiresPresenter(LoginActivityPresenter::class)
-class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
-
+@RequiresPresenter(RegistrationActivityPresenter::class)
+class RegistrationActivity : NucleusActivity<RegistrationActivityPresenter>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-
-        signInButton.setOnClickListener {
-            progress.visibility = View.VISIBLE
-            presenter.signInUser(email.text.toString(), password.text.toString())
-        }
+        setContentView(R.layout.activity_registration)
 
         signUpButton.setOnClickListener {
-            goToRegistrationActivity()
+            //progress.visibility = View.VISIBLE
+            //presenter.signInUser(email.text.toString(), password.text.toString())
+        }
+
+        signInButton.setOnClickListener {
+           goToLoginActivity()
         }
     }
 
-    private fun goToRegistrationActivity() {
-        val intent = Intent(this.baseContext, RegistrationActivity::class.java)
+    private fun goToLoginActivity() {
+        val intent = Intent(this.baseContext, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
@@ -51,4 +50,3 @@ class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
         progress.visibility = View.GONE
     }
 }
-

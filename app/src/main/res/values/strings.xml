@@ -4,6 +4,9 @@
     <string name="email">Почта</string>
     <string name="password">Пароль</string>
     <string name="sign_in">Войти</string>
+    <string name="name">Имя</string>
+    <string name="surname">Фамилия</string>
+    <string name="date_of_birth">Дата рождения</string>
     <string name="sign_up">Зарегестрироваться</string>
     <string name="error_invalid_device_code">Код устройстрва должен содержать 10 символов</string>
     <string name="error_field_required">Поле обязвтельно для заполнения</string>
