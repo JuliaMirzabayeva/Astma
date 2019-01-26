@@ -6,6 +6,7 @@ import com.example.jjp.astma.dagger.App
 import com.example.jjp.astma.models.login.LoginRepository
 import com.example.jjp.astma.preferences.CommonPreferencesHelper
 import nucleus.presenter.Presenter
+import java.util.*
 import javax.inject.Inject
 
 class LoginActivityPresenter : Presenter<LoginActivity>() {
@@ -33,5 +34,16 @@ class LoginActivityPresenter : Presenter<LoginActivity>() {
 
     fun signInUser(email: String, password: String) {
         loginUseCase?.signInUser(SignInRequest(email, password), onResult, onError)
+    }
+
+    fun signUpUser(email: String,
+                   password: String,
+                   name: String,
+                   surname : String,
+                   birth : Date,
+                   sex : Int,
+                   height : Int,
+                   weight: Int) {
+
     }
 }

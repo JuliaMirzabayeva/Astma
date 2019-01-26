@@ -8,10 +8,11 @@
     tools:context=".modules.login.LoginActivity">
 
     <ImageView
+        android:id="@+id/registrationBackImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_arrow_back"
-        android:padding="12dp"/>
+        android:padding="12dp"
+        android:src="@drawable/ic_arrow_back" />
 
     <ProgressBar
         android:id="@+id/registrationProgress"
@@ -36,9 +37,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/normal_margin"
                 android:text="@string/finish_sign_up"
-                android:textColor="@color/colorGrey"
-                android:layout_marginBottom="@dimen/normal_margin"/>
+                android:textColor="@color/colorGrey" />
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/nameLayout"
@@ -91,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/man_sex"
-                    android:textColor="@color/colorLightGrey"/>
+                    android:textColor="@color/colorGrey" />
 
                 <RadioButton
                     android:id="@+id/radioButtonKitten"
@@ -99,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:text="@string/woman_sex"
-                    android:textColor="@color/colorLightGrey"/>
+                    android:textColor="@color/colorGrey" />
             </RadioGroup>
 
             <android.support.design.widget.TextInputLayout
