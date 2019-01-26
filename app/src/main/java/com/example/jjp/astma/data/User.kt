@@ -2,8 +2,9 @@ package com.example.jjp.astma.data
 
 class User()
 
-enum class Sex(val sex: Int) {
+enum class UserSex(val value: Int) {
+    WOMAN(0),
     MAN(1),
-    WOMAN(0)
+    OTHER(2)
 }
 

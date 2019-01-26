@@ -10,6 +10,7 @@
     <string name="sex">Пол</string>
     <string name="man_sex">Муж.</string>
     <string name="woman_sex">Жен.</string>
+    <string name="other">Другое</string>
     <string name="height">Рост</string>
     <string name="weight">Вес</string>
     <string name="sign_up">Зарегестрироваться</string>

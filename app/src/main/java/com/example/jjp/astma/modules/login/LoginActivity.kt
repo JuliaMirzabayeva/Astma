@@ -5,14 +5,17 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputLayout
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import com.example.jjp.astma.R
+import com.example.jjp.astma.data.UserSex
 import com.example.jjp.astma.modules.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import nucleus.factory.RequiresPresenter
 import nucleus.view.NucleusActivity
+import java.security.InvalidParameterException
+import java.util.*
+import android.app.DatePickerDialog
+import android.widget.*
+
 
 @RequiresPresenter(LoginActivityPresenter::class)
 class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
@@ -51,13 +54,16 @@ class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
         val surnameLayout = registrationView.findViewById<TextInputLayout>(R.id.surnameLayout)
         val surname = registrationView.findViewById<TextView>(R.id.surname)
         val birthLayout = registrationView.findViewById<TextInputLayout>(R.id.birthLayout)
+        val sexMan = registrationView.findViewById<RadioButton>(R.id.sexManButton)
+        val sexWoman = registrationView.findViewById<RadioButton>(R.id.sexWomanButton)
+        val sexOther = registrationView.findViewById<RadioButton>(R.id.sexOtherButton)
         val birth = registrationView.findViewById<TextView>(R.id.birth)
         val heightLayout = registrationView.findViewById<TextInputLayout>(R.id.heightLayout)
         val height = registrationView.findViewById<TextView>(R.id.height)
         val weightLayout = registrationView.findViewById<TextInputLayout>(R.id.weightLayout)
         val weight = registrationView.findViewById<TextView>(R.id.weight)
 
-        fun validateRegistrationFields() : Boolean {
+        fun validateRegistrationFields(): Boolean {
             nameLayout.error = if (name.text.isEmpty()) getString(R.string.error_field_required) else null
             surnameLayout.error = if (surname.text.isEmpty()) getString(R.string.error_field_required) else null
             birthLayout.error = if (birth.text.isEmpty()) getString(R.string.error_field_required) else null
@@ -71,13 +77,60 @@ class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
                     weightLayout.error == null
         }
 
+        fun getSex(): Int {
+           return when {
+               sexMan.isChecked -> UserSex.MAN.value
+               sexWoman.isChecked -> UserSex.WOMAN.value
+               sexOther.isChecked -> UserSex.OTHER.value
+               else -> throw InvalidParameterException()
+           }
+        }
+
+        fun getDate (date: String): Date {
+            //TODO
+            return Date()
+        }
+
+        fun signUpUser() {
+            presenter?.signUpUser(email = email.text.toString(),
+                    password = password.text.toString(),
+                    name = name.text.toString(),
+                    surname = surname.text.toString(),
+                    sex = getSex(),
+                    birth = getDate(birth.text.toString()),
+                    height = height.text.toString().toInt(),
+                    weight = weight.text.toString().toInt())
+        }
+
+        fun showDatePicker(){
+            val date = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                //                    // TODO Auto-generated method stub
+                //                    myCalendar.set(Calendar.YEAR, year)
+                //                    myCalendar.set(Calendar.MONTH, monthOfYear)
+                //                    myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                //                    updateLabel()
+            }
+
+            val calendar = GregorianCalendar()
+            DatePickerDialog(this,
+                    date,
+                    calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)).show()
+        }
+
         finishSignUpButton.setOnClickListener {
             if (validateRegistrationFields()) {
+                signUpUser()
             }
         }
 
         backButton.setOnClickListener {
             loginRootLayout.removeView(registrationView)
+        }
+
+        birth.setOnClickListener {
+            showDatePicker()
         }
 
         loginRootLayout.addView(registrationView)

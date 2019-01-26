@@ -71,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/surname"
-                    android:imeOptions="actionNext"
+                    android:imeOptions="actionDone"
                     android:inputType="textCapWords"
                     android:maxLines="1"
                     android:singleLine="true"
@@ -88,18 +88,27 @@
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:id="@+id/radioButtonHusband"
+                    android:id="@+id/sexManButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/man_sex"
                     android:textColor="@color/colorGrey" />
 
                 <RadioButton
-                    android:id="@+id/radioButtonKitten"
+                    android:id="@+id/sexWomanButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:text="@string/woman_sex"
+                    android:textColor="@color/colorGrey" />
+
+                <RadioButton
+                    android:id="@+id/sexOtherButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:text="@string/other"
+                    android:checked="true"
                     android:textColor="@color/colorGrey" />
             </RadioGroup>
 
@@ -115,6 +124,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/date_of_birth"
                     android:imeOptions="actionNext"
+                    android:focusable="false"
                     android:inputType="date"
                     android:maxLines="1"
                     android:singleLine="true"
@@ -152,7 +162,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/weight"
-                    android:imeOptions="actionNext"
+                    android:imeOptions="actionDone"
                     android:inputType="numberDecimal"
                     android:maxLines="1"
                     android:singleLine="true"
