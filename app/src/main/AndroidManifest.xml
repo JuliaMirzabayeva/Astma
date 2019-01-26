@@ -27,11 +27,6 @@
         </activity>
 
         <activity
-            android:name=".modules.login.RegistrationActivity"
-            android:windowSoftInputMode="adjustResize">
-        </activity>
-
-        <activity
             android:name=".modules.main.MainActivity"
             android:screenOrientation="landscape">
         </activity>
