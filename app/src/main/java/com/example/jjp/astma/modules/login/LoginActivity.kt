@@ -15,6 +15,7 @@ import java.security.InvalidParameterException
 import java.util.*
 import android.app.DatePickerDialog
 import android.widget.*
+import java.text.SimpleDateFormat
 
 
 @RequiresPresenter(LoginActivityPresenter::class)
@@ -86,9 +87,12 @@ class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
            }
         }
 
+        fun getSimpleDayFormat(): SimpleDateFormat {
+            return SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+        }
+
         fun getDate (date: String): Date {
-            //TODO
-            return Date()
+            return getSimpleDayFormat().parse(date)
         }
 
         fun signUpUser() {
@@ -104,11 +108,8 @@ class LoginActivity : NucleusActivity<LoginActivityPresenter>() {
 
         fun showDatePicker(){
             val date = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                //                    // TODO Auto-generated method stub
-                //                    myCalendar.set(Calendar.YEAR, year)
-                //                    myCalendar.set(Calendar.MONTH, monthOfYear)
-                //                    myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                //                    updateLabel()
+                val birthTime = presenter.getCalendar(dayOfMonth, monthOfYear, year).time
+                birth.text = getSimpleDayFormat().format(birthTime)
             }
 
             val calendar = GregorianCalendar()

@@ -1,18 +1,18 @@
 package com.example.jjp.astma.api
 
-import com.example.jjp.astma.api.request.EditQuoteRequest
-import com.example.jjp.astma.api.request.QuoteRequest
-import com.example.jjp.astma.api.request.QuotesRequest
-import com.example.jjp.astma.api.request.SignInRequest
+import com.example.jjp.astma.api.request.*
 import com.example.jjp.astma.api.response.QuoteResponse
-import com.example.jjp.astma.api.response.SignInResponse
+import com.example.jjp.astma.api.response.LoginResponse
 import retrofit2.http.POST
 import retrofit2.Call
 import retrofit2.http.Body
 
 interface ApiService {
     @POST("api/login")
-    fun signIn(@Body request: SignInRequest): Call<SignInResponse>
+    fun signIn(@Body request: SignInRequest): Call<LoginResponse>
+
+    @POST("api/login/signup")
+    fun signUp(@Body request: SignUpRequest): Call<LoginResponse>
 
     @POST("api/chart/add")
     fun addQuote(@Body request: QuoteRequest): Call<QuoteResponse>
