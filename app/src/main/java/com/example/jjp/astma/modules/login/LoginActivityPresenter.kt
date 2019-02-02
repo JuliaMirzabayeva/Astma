@@ -53,7 +53,6 @@ class LoginActivityPresenter : Presenter<LoginActivity>() {
                 sex = sex,
                 height = height,
                 weight = weight), onResult, onError)
-
     }
 
     fun getCalendar(day: Int, month: Int, year: Int): GregorianCalendar {

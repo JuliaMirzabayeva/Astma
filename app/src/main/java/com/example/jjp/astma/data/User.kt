@@ -1,6 +1,14 @@
 package com.example.jjp.astma.data
 
-class User()
+import java.util.*
+
+class User(val id: Int,
+           val name: String,
+           val surname: String,
+           val sex: Int,
+           val birth: Date,
+           val height: Int,
+           val weight: Int)
 
 enum class UserSex(val value: Int) {
     WOMAN(0),
