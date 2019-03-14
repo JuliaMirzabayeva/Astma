@@ -3,12 +3,18 @@
     <color name="colorPrimary">#1E1E1D</color>
     <color name="colorPrimaryDark">#111111</color>
     <color name="colorAccent">#516c47</color>
+
     <color name="colorLightGrey">#D8D8D8</color>
     <color name="colorGrey">#808080</color>
     <color name="colorGreyDark">#636363</color>
+
     <color name="colorError">#D25252</color>
+
     <color name="colorChartLine">#EFC090</color>
     <color name="colorChartValue">#EFC090</color>
+    <color name="colorChartRedLine">#dd2c00</color>
+    <color name="colorChartYellowLine">#ffd600</color>
+    <color name="colorChartGreenLine">#64dd17</color>
 
     <!--<color name="colorPrimary">#FFFFFF</color>-->
     <!--<color name="colorPrimaryDark">#808080</color>-->

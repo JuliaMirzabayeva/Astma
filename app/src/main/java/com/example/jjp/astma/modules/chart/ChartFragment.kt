@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.jjp.astma.R
 import com.example.jjp.astma.data.Quote
 import com.example.jjp.astma.modules.main.MainActivity
+import com.github.mikephil.charting.components.LimitLine
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -28,7 +29,8 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         val entries = ArrayList<Entry>()
 
         quotes.forEach { quote ->
-            entries.add(Entry(presenter.getDay(quote).toFloat(), quote.value.toFloat()))
+            val entry = Entry(presenter.getDay(quote).toFloat(), quote.value.toFloat())
+            entries.add(entry)
         }
 
         val dataSet = LineDataSet(entries, "")
@@ -54,16 +56,17 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
 
         val data = LineData(dataSet)
         chart.data = data
-        chart.animateX(2500)
+        chart.animateX(1000)
 
         chart.invalidate()
     }
 
     fun addQuote(quote: Quote) {
         if (chart.data == null || chart.data.dataSets.isEmpty()) {
-            initChart(listOf(quote))
+            presenter.initChart(listOf(quote))
         } else {
-            chart.data.addEntry(Entry(presenter.getDay(quote).toFloat(), quote.value.toFloat()), 0)
+            val entry = Entry(presenter.getDay(quote).toFloat(), quote.value.toFloat())
+            chart.data.addEntry(entry, 0)
         }
         chart.notifyDataSetChanged()
         chart.invalidate()
@@ -79,6 +82,14 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         chart.xAxis.axisMinimum = 1F
         chart.xAxis.axisMaximum = maxX.toFloat()
         chart.invalidate()
+    }
+
+    fun addLimitLine(value : Double, color : Int){
+        val line = LimitLine(value.toFloat())
+        line.lineColor = ContextCompat.getColor(activity.baseContext, color)
+
+        val leftAxis = chart.axisLeft
+        leftAxis.addLimitLine(line)
     }
 
     fun showError(error: String? = null) {

@@ -1,6 +1,7 @@
 package com.example.jjp.astma.modules.chart
 
 import android.os.Bundle
+import com.example.jjp.astma.R
 import com.example.jjp.astma.dagger.App
 import com.example.jjp.astma.data.Quote
 import com.example.jjp.astma.models.QuotesManager
@@ -42,7 +43,9 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
 
     private val onResult: (quotes: List<Quote>) -> Unit = { list ->
         quotesManager.setQuotes(list)
-        if (list.isNotEmpty() && isForChart(list[0])) view?.initChart(list)
+        if (list.isNotEmpty() && isForChart(list[0])) {
+            initChart(list)
+        }
     }
 
     private val onError: (error: String?) -> Unit = { it ->
@@ -70,6 +73,17 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
     override fun dropView() {
         quotesManager.removeQuoteListener(quotesListener)
         super.dropView()
+    }
+
+    fun initChart(quotes: List<Quote>) {
+        view?.initChart(quotes)
+        addLimitLines()
+    }
+
+    private fun addLimitLines(){
+        view?.addLimitLine(10.0, R.color.colorChartRedLine)
+        view?.addLimitLine(20.0, R.color.colorChartYellowLine)
+        view?.addLimitLine(30.0, R.color.colorChartGreenLine)
     }
 
     private fun isForChart(quote: Quote): Boolean {
