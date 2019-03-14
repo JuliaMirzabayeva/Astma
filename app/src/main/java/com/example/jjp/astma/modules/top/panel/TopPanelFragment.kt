@@ -24,6 +24,7 @@ class TopPanelFragment : NucleusFragment<TopPanelFragmentPresenter>() {
         super.onViewCreated(view, savedInstanceState)
         chartDateLabel.setOnClickListener { openMonthYearPicker() }
         menuButton.setOnClickListener { (activity as MainActivity).inflateProfile() }
+        unarchiveButton.setOnClickListener { presenter?.loadPdf() }
     }
 
     fun setDefaultPickerDate() {

@@ -13,8 +13,8 @@
     <string name="other">Другое</string>
     <string name="height">Рост</string>
     <string name="weight">Вес</string>
-    <string name="sign_up">Зарегестрироваться</string>
-    <string name="finish_sign_up">Для завершения регестрирации заполните следующие поля.\nИх можно будет изменить в настройках.</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="finish_sign_up">Для завершения регистрации заполните следующие поля.\nИх можно будет изменить в настройках.</string>
     <string name="error_invalid_device_code">Код устройстрва должен содержать 10 символов</string>
     <string name="error_field_required">Поле обязвтельно для заполнения</string>
     <string name="add">Добавить</string>

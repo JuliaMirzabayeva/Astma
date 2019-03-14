@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 class AppModule {
-    private static final String API_URL = "http://differum-001-site1.htempurl.com"; //"http://172.18.13.68:5000"
+    private static final String API_URL = "http://91.151.187.12:5000"; //http://172.18.13.68:5000"; //"http://differum-001-site1.htempurl.com"
     private App app;
 
     AppModule(App application) {

@@ -45,6 +45,10 @@ class TopPanelFragmentPresenter : Presenter<TopPanelFragment>() {
         quotesManager.changeQuotesRange(month, year, maxRange)
     }
 
+    fun loadPdf(){
+
+    }
+
     fun getCalendar(year: Int, month: Int): Calendar {
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.DAY_OF_MONTH, DEFAULT_DAY)

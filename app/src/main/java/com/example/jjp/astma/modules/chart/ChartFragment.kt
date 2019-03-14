@@ -60,7 +60,7 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
     }
 
     fun addQuote(quote: Quote) {
-        if (chart.data.dataSets.isEmpty()) {
+        if (chart.data == null || chart.data.dataSets.isEmpty()) {
             initChart(listOf(quote))
         } else {
             chart.data.addEntry(Entry(presenter.getDay(quote).toFloat(), quote.value.toFloat()), 0)
