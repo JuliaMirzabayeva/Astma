@@ -2,10 +2,14 @@ package com.example.jjp.astma.models
 
 import android.text.format.DateFormat
 import com.example.jjp.astma.data.Quote
+import com.example.jjp.astma.preferences.CommonPreferencesHelper
 import java.util.*
 import kotlin.collections.HashMap
 
-class QuotesManager {
+class QuotesManager
+constructor(
+        val commonPreferencesHelper: CommonPreferencesHelper
+) {
     var quotes = HashMap<Pair<Int, Int>, MutableList<Quote>>() // Pair<Int, Int> = Pair<year, month>
     private var quoteListeners = HashSet<QuoteListener>()
 
@@ -23,11 +27,15 @@ class QuotesManager {
         quoteListeners.remove(listener)
     }
 
+    fun getCurrentQuotes() : List<Quote>? {
+        val currentDate = Pair(commonPreferencesHelper.chartYear, commonPreferencesHelper.chartMonth)
+        return quotes[currentDate]?.sortedBy { it.date }
+    }
+
     fun addQuote(quote: Quote) {
         val date = Pair(getYear(quote), getMonth(quote))
         if (quotes[date] != null) {
             quotes[date]?.add(quote)
-            quotes[date]?.sortBy { it.date }
         } else {
             quotes[date] = mutableListOf(quote)
         }

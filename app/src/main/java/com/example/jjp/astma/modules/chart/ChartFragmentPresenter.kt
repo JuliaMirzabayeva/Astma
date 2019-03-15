@@ -22,17 +22,11 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
 
     private val quotesListener = object : QuotesManager.QuoteListener {
         override fun onQuoteAdded(quote: Quote) {
-            if (isForChart(quote)) view?.addQuote(quote)
+            fillChart(quotesManager.getCurrentQuotes())
         }
 
         override fun onQuoteEdited(quote: Quote) {
-            if ((isForChart(quote))) {
-                val quotes = quotesManager.quotes[Pair(getYear(quote), getMonth(quote))]
-                quotes?.let {
-                    view?.clearChart()
-                    view?.initChart(it)
-                }
-            }
+            fillChart(quotesManager.getCurrentQuotes())
         }
 
         override fun onQuotesRangeChanged(month: Int, year: Int, maxRange: Int) {
@@ -43,8 +37,8 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
 
     private val onResult: (quotes: List<Quote>) -> Unit = { list ->
         quotesManager.setQuotes(list)
-        if (list.isNotEmpty() && isForChart(list[0])) {
-            initChart(list)
+        quotesManager.getCurrentQuotes()?.let {
+            initChart(it)
         }
     }
 
@@ -75,31 +69,25 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
         super.dropView()
     }
 
+    fun fillChart(quotes: List<Quote>?) {
+        view?.clearChart()
+        quotes?.let {
+            view?.addQuotes(it)
+        }
+    }
+
     fun initChart(quotes: List<Quote>) {
         view?.initChart(quotes)
         addLimitLines()
     }
 
-    private fun addLimitLines(){
+    private fun addLimitLines() {
         view?.addLimitLine(10.0, R.color.colorChartRedLine)
         view?.addLimitLine(20.0, R.color.colorChartYellowLine)
         view?.addLimitLine(30.0, R.color.colorChartGreenLine)
     }
 
-    private fun isForChart(quote: Quote): Boolean {
-        return getMonth(quote) == commonPreferencesHelper.chartMonth
-                && getYear(quote) == commonPreferencesHelper.chartYear
-    }
-
     fun getDay(quote: Quote) : Int{
         return quotesManager.getDay(quote)
-    }
-
-    private fun getMonth(quote: Quote) : Int{
-        return quotesManager.getMonth(quote)
-    }
-
-    private fun getYear(quote: Quote) : Int{
-        return quotesManager.getYear(quote)
     }
 }

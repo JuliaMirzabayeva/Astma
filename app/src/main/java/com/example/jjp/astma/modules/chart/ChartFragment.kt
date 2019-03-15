@@ -61,6 +61,23 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         chart.invalidate()
     }
 
+    fun addQuotes(quotes: List<Quote>) {
+        if (chart.data == null || chart.data.dataSets.isEmpty()) {
+            presenter.initChart(quotes)
+        } else {
+            val entries = ArrayList<Entry>()
+            quotes.forEach { quote ->
+                val entry = Entry(presenter.getDay(quote).toFloat(), quote.value.toFloat())
+                entries.add(entry)
+            }
+            entries.forEach {
+                chart.data.addEntry(it, 0)
+            }
+        }
+        chart.notifyDataSetChanged()
+        chart.invalidate()
+    }
+
     fun addQuote(quote: Quote) {
         if (chart.data == null || chart.data.dataSets.isEmpty()) {
             presenter.initChart(listOf(quote))

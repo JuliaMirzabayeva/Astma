@@ -21,6 +21,7 @@ class ProfileFragment : NucleusFragment<ProfileFragmentPresenter>() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         logoutButton.setOnClickListener {
+            presenter.clearPreferences()
             goToLoginActivity()
         }
     }

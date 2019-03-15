@@ -61,19 +61,19 @@ class AppModule {
     }
 
     @Provides
-    SharedPreferences providePreferences(Context context){
+    SharedPreferences providePreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     @Provides
     @Singleton
-    CommonPreferencesHelper provideCommonPreferencesHelper(SharedPreferences preferences){
+    CommonPreferencesHelper provideCommonPreferencesHelper(SharedPreferences preferences) {
         return new CommonPreferencesHelper(preferences);
     }
 
     @Provides
     @Singleton
-    QuotesManager provideQuotesManager(){
-        return new QuotesManager();
+    QuotesManager provideQuotesManager(CommonPreferencesHelper commonPreferencesHelper) {
+        return new QuotesManager(commonPreferencesHelper);
     }
 }
