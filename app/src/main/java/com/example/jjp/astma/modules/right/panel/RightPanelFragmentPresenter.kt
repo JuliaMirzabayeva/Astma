@@ -36,10 +36,12 @@ class RightPanelFragmentPresenter : Presenter<RightPanelFragment>() {
     }
 
     private val onAddResult: (quote: Quote) -> Unit = {
+        view?.clearQuoteValue()
         quotesManager.addQuote(it)
     }
 
     private val onEditResult: (quote: Quote) -> Unit = {
+        view?.clearQuoteValue()
         editQuote = null
         quotesManager.editQuote(it)
     }

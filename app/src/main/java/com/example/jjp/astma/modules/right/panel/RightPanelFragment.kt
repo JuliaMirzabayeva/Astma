@@ -65,6 +65,10 @@ class RightPanelFragment : NucleusFragment<RightPanelFragmentPresenter>() {
         setDate(Calendar.getInstance().time)
     }
 
+    fun clearQuoteValue() {
+        valueLabel.text.clear()
+    }
+
     private fun setTimeSelected(isMorning: Boolean) {
         morningButton.isSelected = isMorning
         eveningButton.isSelected = !isMorning
