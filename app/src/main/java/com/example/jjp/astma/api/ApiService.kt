@@ -9,10 +9,10 @@ import retrofit2.Call
 import retrofit2.http.Body
 
 interface ApiService {
-    @POST("api/login")
+    @POST("api/user/login")
     fun signIn(@Body request: SignInRequest): Call<LoginResponse>
 
-    @POST("api/login/signup")
+    @POST("api/user/signup")
     fun signUp(@Body request: SignUpRequest): Call<LoginResponse>
 
     @POST("api/chart/add")

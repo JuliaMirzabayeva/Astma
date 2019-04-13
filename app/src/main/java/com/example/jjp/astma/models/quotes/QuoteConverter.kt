@@ -8,16 +8,20 @@ import java.util.*
 
 class QuoteConverter {
     fun convertQuoteToQuoteRequest(quote: Quote, token: String): QuoteRequest {
-        return QuoteRequest(quote.value,
+        return QuoteRequest(
+                quote.value,
                 quote.date,
                 quote.isMorning,
-                token)
+                token
+        )
     }
 
     fun convertDataToQuotesRequest(month: Int, year: Int, daysInMonth: Int, token: String): QuotesRequest {
-        return QuotesRequest(getGregorianCalendar(year, month, 1),
+        return QuotesRequest(
+                getGregorianCalendar(year, month, 1),
                 getGregorianCalendar(year, month, daysInMonth),
-                token)
+                token
+        )
     }
 
     fun convertQuotesResponseToQuoteList(quotesResponse: List<QuoteResponse>): List<Quote> {
@@ -25,10 +29,12 @@ class QuoteConverter {
     }
 
     fun convertQuoteResponseToQuote(quoteResponse: QuoteResponse): Quote {
-        return Quote(quoteResponse.id,
+        return Quote(
+                quoteResponse.id,
                 quoteResponse.value,
                 quoteResponse.date,
-                quoteResponse.isMorning)
+                quoteResponse.isMorning
+        )
     }
 
     private fun getGregorianCalendar(year: Int, month: Int, day: Int) = GregorianCalendar(year, month, day).time

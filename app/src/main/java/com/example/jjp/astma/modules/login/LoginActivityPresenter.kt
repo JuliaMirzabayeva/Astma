@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.example.jjp.astma.api.request.SignInRequest
 import com.example.jjp.astma.api.request.SignUpRequest
 import com.example.jjp.astma.dagger.App
+import com.example.jjp.astma.data.User
 import com.example.jjp.astma.models.login.LoginRepository
 import com.example.jjp.astma.preferences.CommonPreferencesHelper
 import nucleus.presenter.Presenter
@@ -16,8 +17,8 @@ class LoginActivityPresenter : Presenter<LoginActivity>() {
 
     private var loginUseCase: LoginUseCase? = null
 
-    private val onResult: (token: String) -> Unit = {
-        commonPreferencesHelper.userToken = it
+    private val onResult: (user: User) -> Unit = { user ->
+        commonPreferencesHelper.userToken = user.token
         view?.hideProgress()
         view?.goToChartActivity()
     }

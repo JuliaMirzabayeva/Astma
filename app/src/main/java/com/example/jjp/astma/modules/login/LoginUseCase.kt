@@ -2,16 +2,17 @@ package com.example.jjp.astma.modules.login
 
 import com.example.jjp.astma.api.request.SignInRequest
 import com.example.jjp.astma.api.request.SignUpRequest
+import com.example.jjp.astma.data.User
 import com.example.jjp.astma.models.listeners.ModelLoadingListener
 import com.example.jjp.astma.models.login.LoginRepository
 
 class LoginUseCase(private val loginRepository: LoginRepository) {
     fun signInUser(signInRequest: SignInRequest,
-                   onResult: ((String)) -> Unit,
+                   onResult: (User) -> Unit,
                    onError: (String?) -> Unit) {
 
-        loginRepository.signInUser(signInRequest, object : ModelLoadingListener<String> {
-            override fun onModelLoaded(model: String) {
+        loginRepository.signInUser(signInRequest, object : ModelLoadingListener<User> {
+            override fun onModelLoaded(model: User) {
                 onResult(model)
             }
 
@@ -26,11 +27,11 @@ class LoginUseCase(private val loginRepository: LoginRepository) {
     }
 
     fun signUpUser(signUpRequest: SignUpRequest,
-                   onResult: ((String)) -> Unit,
+                   onResult: (User) -> Unit,
                    onError: (String?) -> Unit) {
 
-        loginRepository.signUpUser(signUpRequest, object : ModelLoadingListener<String> {
-            override fun onModelLoaded(model: String) {
+        loginRepository.signUpUser(signUpRequest, object : ModelLoadingListener<User> {
+            override fun onModelLoaded(model: User) {
                 onResult(model)
             }
 
