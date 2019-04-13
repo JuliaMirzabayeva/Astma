@@ -101,8 +101,8 @@ class ChartFragment : NucleusFragment<ChartFragmentPresenter>() {
         chart.invalidate()
     }
 
-    fun addLimitLine(value : Double, color : Int){
-        val line = LimitLine(value.toFloat())
+    fun addLimitLine(value : Float, color : Int){
+        val line = LimitLine(value)
         line.lineColor = ContextCompat.getColor(activity.baseContext, color)
 
         val leftAxis = chart.axisLeft

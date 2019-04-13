@@ -8,6 +8,7 @@ import com.example.jjp.astma.models.QuotesManager
 import com.example.jjp.astma.models.quotes.QuoteConverter
 import com.example.jjp.astma.models.quotes.QuotesRepository
 import com.example.jjp.astma.preferences.CommonPreferencesHelper
+import com.example.jjp.astma.preferences.UserPreferencesHelper
 import nucleus.presenter.Presenter
 import javax.inject.Inject
 
@@ -15,6 +16,7 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
     @Inject lateinit var quotesManager: QuotesManager
     @Inject lateinit var quotesRepository: QuotesRepository
     @Inject lateinit var commonPreferencesHelper: CommonPreferencesHelper
+    @Inject lateinit var userPreferencesHelper: UserPreferencesHelper
 
     private var chartUseCase: ChartUseCase? = null
 
@@ -82,9 +84,9 @@ class ChartFragmentPresenter : Presenter<ChartFragment>() {
     }
 
     private fun addLimitLines() {
-        view?.addLimitLine(10.0, R.color.colorChartRedLine)
-        view?.addLimitLine(20.0, R.color.colorChartYellowLine)
-        view?.addLimitLine(30.0, R.color.colorChartGreenLine)
+        view?.addLimitLine(userPreferencesHelper.topBound, R.color.colorChartRedLine)
+        view?.addLimitLine(userPreferencesHelper.userRate, R.color.colorChartYellowLine)
+        view?.addLimitLine(userPreferencesHelper.bottomBound, R.color.colorChartGreenLine)
     }
 
     fun getDay(quote: Quote) : Int{

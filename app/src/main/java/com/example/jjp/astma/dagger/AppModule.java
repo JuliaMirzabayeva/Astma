@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import com.example.jjp.astma.api.ApiService;
 import com.example.jjp.astma.models.QuotesManager;
 import com.example.jjp.astma.preferences.CommonPreferencesHelper;
+import com.example.jjp.astma.preferences.UserPreferencesHelper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -69,6 +70,12 @@ class AppModule {
     @Singleton
     CommonPreferencesHelper provideCommonPreferencesHelper(SharedPreferences preferences) {
         return new CommonPreferencesHelper(preferences);
+    }
+
+    @Provides
+    @Singleton
+    UserPreferencesHelper provideUserPreferencesHelper(SharedPreferences preferences) {
+        return new UserPreferencesHelper(preferences);
     }
 
     @Provides

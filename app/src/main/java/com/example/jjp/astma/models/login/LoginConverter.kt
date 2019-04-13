@@ -23,9 +23,9 @@ class LoginConverter {
 
     private fun convertPeakFlowmetryBoundsResponseToPeakFlowmetryBounds(peakFlowmetryBoundsResponse: PeakFlowmetryBoundsResponse): PeakFlowmetryBounds {
         return PeakFlowmetryBounds(
-                topBound = peakFlowmetryBoundsResponse.topBound,
-                bottomBound = peakFlowmetryBoundsResponse.bottomBound,
-                userRate = peakFlowmetryBoundsResponse.userRate
+                topBound = peakFlowmetryBoundsResponse.topBound.toFloat(),
+                bottomBound = peakFlowmetryBoundsResponse.bottomBound.toFloat(),
+                userRate = peakFlowmetryBoundsResponse.userRate.toFloat()
         )
     }
 }

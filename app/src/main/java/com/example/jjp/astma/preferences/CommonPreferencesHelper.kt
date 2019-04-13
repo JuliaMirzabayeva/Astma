@@ -2,8 +2,8 @@ package com.example.jjp.astma.preferences
 
 import android.content.SharedPreferences
 
-
-class CommonPreferencesHelper(var preferences: SharedPreferences) : Preferences {
+class CommonPreferencesHelper
+constructor(var preferences: SharedPreferences) : Preferences {
     var userToken: String?
         get() = preferences.getString(USER_TOKEN, null)
         set(value) = preferences.edit().putString(USER_TOKEN, value).apply()
